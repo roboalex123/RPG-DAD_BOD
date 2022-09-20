@@ -1,5 +1,5 @@
 //Fill out this comment with your names and which bullet points you did
-//Partners: Sayre, Voss, Heins, Henson
+//Partners: Sayre, Voss, Heins
 //Bullet Points:
 //Extra Credit:
 //URL to cover art and music:
@@ -12,7 +12,7 @@ using namespace std;
 
 const auto [ROWS, COLS] = get_terminal_size();
 const double MAP_BORDER_X = 0.70;
-const double MAP_BORDER_Y = 0.80;
+const double MAP_BORDER_Y = 0.75;
 const double TASK_BORDER_X = 1.00 - MAP_BORDER_X;
 const double TASK_BORDER_Y =  MAP_BORDER_Y;
 const double INVENTORY_BORDER_X = 1.00;
@@ -48,7 +48,8 @@ void print_inventory() {
 		for (int j = 0; j < inventory_literal_x; j++) {
 			cout << border.at(i).at(j);
 		}
-		cout << endl;
+		y_start++ ;
+		movecursor(y_start, x_start);
 	}
 }
 void print_task_list() {
@@ -77,12 +78,15 @@ void print_task_list() {
 		for (int j = 0; j < task_literal_x; j++) {
 			cout << border.at(i).at(j);
 		}
-		movecursor(i, x_start);
+		movecursor(i + 2, x_start);
 	}
 }
 void print_map() {
 	int map_literal_x = COLS * MAP_BORDER_X;
+	int x_start = 0;
+
 	int map_literal_y = ROWS * MAP_BORDER_Y;
+	int y_start = 0;
 
 	vector<vector<char>> border(map_literal_y, vector<char>(map_literal_x));
 
@@ -103,13 +107,13 @@ void print_map() {
 		for (int j = 0; j < map_literal_x; j++) {
 			cout << border.at(i).at(j);
 		}
-		cout << endl;
+		movecursor(i + 2, x_start);
 	}
 }
 void print_screen() {
 	movecursor(0, 0);
 	clearscreen();
-	//print_map();
+	print_map();
 	print_task_list();
 	print_inventory();
 
