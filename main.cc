@@ -48,7 +48,7 @@ void print_inventory() {
 		for (int j = 0; j < inventory_literal_x; j++) {
 			cout << border.at(i).at(j);
 		}
-		y_start++ ;
+		y_start++;
 		movecursor(y_start, x_start);
 	}
 }
@@ -78,7 +78,13 @@ void print_task_list() {
 		for (int j = 0; j < task_literal_x; j++) {
 			cout << border.at(i).at(j);
 		}
-		movecursor(i + 2, x_start);
+		if (i == 0) {
+			y_start += 2;
+			movecursor(y_start, x_start);
+		} else {
+			y_start++;
+			movecursor(y_start, x_start);
+		}
 	}
 }
 void print_map() {
@@ -107,7 +113,13 @@ void print_map() {
 		for (int j = 0; j < map_literal_x; j++) {
 			cout << border.at(i).at(j);
 		}
-		movecursor(i + 2, x_start);
+		if (i == 0) {
+			y_start += 2;
+			movecursor(y_start, x_start);
+		} else {
+			y_start++;
+			movecursor(y_start, x_start);
+		}
 	}
 }
 void print_screen() {
