@@ -8,11 +8,12 @@ using namespace std;
 int attack(int enemyHealth){
 
 	//time_t time;
-	srand(10);
+	srand(20);
 	char attackKey = 'e';
 	char userInput;
 	int playerAttack = 0;
 
+	cout << "Press attack key:\n";
 	cin >> userInput;
 
 	if (userInput == attackKey){
@@ -32,6 +33,7 @@ int main(){
 	char enableCombat;
 	int enemyHealth = 10;
 
+	cout << "Would you like to start combat: y or n\n";
 	cin >> enableCombat;
 
 	if (enableCombat == 'y'){
@@ -40,6 +42,12 @@ int main(){
 
 			cout << attack(enemyHealth) << endl;
 			enemyHealth = attack(enemyHealth);
+
+			if (enemyHealth <= 0){
+
+				exit(1);
+
+			}
 
 		}
 
