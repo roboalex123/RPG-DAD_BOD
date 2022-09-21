@@ -31,6 +31,11 @@ vector<string> world_map = {
 	"*    s r   *",
 	"************"
 };
+
+vector<string> tasks = {"Task 1", "Task 2", "Task 3", "Task 4","Task 5"};
+vector<bool> completedTask(5);
+vector<string> inventory(0);
+
 void print_inventory() {
 	int inventory_literal_x = COLS * INVENTORY_BORDER_X;
 	int x_start = 0;
@@ -86,17 +91,38 @@ void print_task_list() {
 			}
 		}
 	}
+
+	int borderStartX = x_start;
+	int borderStartY = y_start;
 	for (int i = 0; i < task_literal_y; i++) {
 		for (int j = 0; j < task_literal_x; j++) {
 			cout << border.at(i).at(j);
 		}
 		if (i == 0) {
-			y_start += 2;
-			movecursor(y_start, x_start);
+			borderStartY += 2;
+			movecursor(borderStartY, borderStartX);
 		} else {
-			y_start++;
-			movecursor(y_start, x_start);
+			borderStartY++;
+			movecursor(borderStartY, borderStartX);
 		}
+	}
+
+	string toPrint = "- ";
+	int contentStartX = x_start + 3;
+	int contentStartY = y_start + 2;
+
+	movecursor(contentStartY, contentStartX);
+	cout << "Task List:";
+	contentStartY += 1;
+	movecursor(contentStartY, contentStartX);
+
+	for (size_t i = 0; i < tasks.size(); i++) {
+			toPrint += tasks.at(i); 
+		if(completedTask.at(i)) cout << GREEN << toPrint << RESET;
+		else cout << RED << toPrint << RESET;
+		toPrint = "- ";
+		contentStartY += 1;
+		movecursor(contentStartY, contentStartX);
 	}
 }
 void print_map_border() {
@@ -173,16 +199,43 @@ void print_world(size_t player_row, size_t player_col) {
 	}
 */	
 }
+
+void addInventoryItem(string inv) {
+	if (inv == "ranch") {
+		inventory.push_back("ranch");
+	} else if (inv == "bbq") {
+		inventory.push_back("bbq");
+	}
+
+	return;
+}
+
+void checkLocation(auto row, auto col) {//FIXME add other task (NEED 3 more)
+	char currLoc = world_map.at(row).at(col);
+	if (currLoc == 'r') completedTask.at(0) = (completedTask.at(0) == true) ? false : true;
+	else if (currLoc == 's') completedTask.at(1) = (completedTask.at(1) == true) ? false: true;
+	print_task_list();
+	return;
+}
+
+void dialog(string toPrint){
+	movecursor(15,15);
+	system(("echo " + toPrint + " | lolcat").c_str());
+
+}
+
 void print_screen() {
 	movecursor(0,0);
 	clearscreen();
 	print_map_border();
 	print_task_list();
 	print_inventory();
+	dialog("This is pretty cool");
 
 }
 
 int main() {
+
 	print_screen();
 	const int MAP_ROW = world_map.size();
 	const int MAP_COL = world_map.at(0).size(); //ROWS > MAP_ROW
@@ -198,7 +251,7 @@ int main() {
 		if (c == 'S' or c == DOWN_ARROW) current_row++;
 		if (c == 'A' or c == LEFT_ARROW) current_col--;
 		if (c == 'D' or c == RIGHT_ARROW) current_col++;
-		//if (c == ENTER) current_col++;
+		if (c == '\n') checkLocation(current_row, current_col);
 		if (!(current_row == last_row and current_col == last_col)) {
 			print_world(current_row,current_col);
 			last_row = current_row;
