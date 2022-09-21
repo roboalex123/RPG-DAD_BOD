@@ -8,7 +8,7 @@ using namespace std;
 int attack(int enemyHealth){
 
 	//time_t time;
-	srand(10);
+	srand(20);
 	char attackKey = 'e';
 	char userInput;
 	int playerAttack = 0;
