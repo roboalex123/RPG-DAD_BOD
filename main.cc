@@ -19,6 +19,18 @@ const double INVENTORY_BORDER_X = 1.00;
 const double INVENTORY_BORDER_Y = 1.00 - MAP_BORDER_Y;
 
 
+vector<string> world_map = {
+	"************",
+	"* r   |    *",
+	"*  s  | d  *",
+	"*     |    *",
+	"*   x ---  *",
+	"*        z *",
+	"*      g   *",
+	"* d        *",
+	"*    s r   *",
+	"************"
+};
 void print_inventory() {
 	int inventory_literal_x = COLS * INVENTORY_BORDER_X;
 	int x_start = 0;
@@ -87,7 +99,7 @@ void print_task_list() {
 		}
 	}
 }
-void print_map() {
+void print_map_border() {
 	int map_literal_x = COLS * MAP_BORDER_X;
 	int x_start = 0;
 
@@ -121,11 +133,50 @@ void print_map() {
 			movecursor(y_start, x_start);
 		}
 	}
+
+}
+//FIXME functions for Kerneys map
+char get_world_location(size_t current_row, size_t current_col) {
+	if (current_row >= world_map.size()) return ' ';
+	if (current_col >= world_map.at(current_row).size()) return ' ';
+	return world_map.at(current_row).at(current_col);
+}
+
+void set_world_location(size_t current_row, size_t current_col, char c) {
+	if (current_row >= world_map.size()) return;
+	if (current_col >= world_map.at(current_row).size()) return;
+	world_map.at(current_row).at(current_col) = c;
+}
+
+void print_world(size_t player_row, size_t player_col) {
+
+	// clearscreen();
+	for (size_t row = 0; row < world_map.size(); row++) {
+		movecursor(2 + row,2);
+		for (size_t col = 0; col < world_map.at(row).size(); col++) {
+			if (row == player_row and col == player_col) cout << RED << '@' << RESET;
+			else if (world_map.at(row).at(col) == '*') cout << BLUE << world_map.at(row).at(col) << RESET;
+			else
+				cout << world_map.at(row).at(col);
+		}
+		cout << endl;
+	}
+/*	
+	for (size_t i = 0; i < world_map.size(); i++) {
+		movecursor(5 + i, 5);
+		for (size_t j = 0; j < world_map.at(i).size(); j++) {
+			if(world_map.at(i).at(j) == '@')cout << RED << world_map.at(i).at(j)<< RESET;
+			else if (world_map.at(i).at(j) == '*') cout << BLUE << world_map.at(i).at(j) << RESET;
+			else cout << world_map.at(i).at(j);
+		}
+		cout << endl;
+	}
+*/	
 }
 void print_screen() {
-	movecursor(0, 0);
+	movecursor(0,0);
 	clearscreen();
-	print_map();
+	print_map_border();
 	print_task_list();
 	print_inventory();
 
@@ -133,6 +184,31 @@ void print_screen() {
 
 int main() {
 	print_screen();
-
-	return 0;
+	const int MAP_ROW = world_map.size();
+	const int MAP_COL = world_map.at(0).size(); //ROWS > MAP_ROW
+	const int FPS = 60;
+	int current_row = MAP_ROW/2, current_col = MAP_COL/2;//row to current_row
+	int last_row = -1, last_col = -1;
+	set_raw_mode(true);
+	show_cursor(false);
+	while (true) {
+		int c = toupper(quick_read());
+		if (c == 'Q') break;
+		if (c == 'W' or c == UP_ARROW) current_row--;
+		if (c == 'S' or c == DOWN_ARROW) current_row++;
+		if (c == 'A' or c == LEFT_ARROW) current_col--;
+		if (c == 'D' or c == RIGHT_ARROW) current_col++;
+		//if (c == ENTER) current_col++;
+		if (!(current_row == last_row and current_col == last_col)) {
+			print_world(current_row,current_col);
+			last_row = current_row;
+			last_col = current_col;
+		}	
+	}
+	clearscreen();
+	set_raw_mode(false);
+	show_cursor(true);
+	movecursor(0,0);
+	cout << RESET;
 }
+
