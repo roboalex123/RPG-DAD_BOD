@@ -20,16 +20,23 @@ const double INVENTORY_BORDER_Y = 1.00 - MAP_BORDER_Y;
 
 
 vector<string> world_map = {
-	"************",
-	"* r   |    *",
-	"*  s  | d  *",
-	"*     |    *",
-	"*   x ---  *",
-	"*        z *",
-	"*      g   *",
-	"* d        *",
-	"*    s r   *",
-	"************"
+	"********************************************",
+	"* r                                        *",
+	"* r                                        *",
+	"* r                                        *",
+	"* r     x                 z                *",
+	"* r                                        *",
+	"* r                                        *",
+	"* r     |               r                  *",
+	"* r     |                                  *",
+	"* r                      z                 *",
+	"* r      TT                                *",
+	"* r                          |             *",
+	"* r                            |           *",
+	"* r                            |           *",
+	"* r                                        *",
+	"* r                                        *",
+	"********************************************"
 };
 
 vector<string> tasks = {"Task 1", "Task 2", "Task 3", "Task 4","Task 5"};
@@ -178,7 +185,7 @@ void print_world(size_t player_row, size_t player_col) {
 
 	// clearscreen();
 	for (size_t row = 0; row < world_map.size(); row++) {
-		movecursor(2 + row,2);
+		movecursor(5 + row,5);
 		for (size_t col = 0; col < world_map.at(row).size(); col++) {
 			if (row == player_row and col == player_col) cout << RED << '@' << RESET;
 			else if (world_map.at(row).at(col) == '*') cout << BLUE << world_map.at(row).at(col) << RESET;
@@ -252,6 +259,8 @@ int main() {
 		if (c == 'A' or c == LEFT_ARROW) current_col--;
 		if (c == 'D' or c == RIGHT_ARROW) current_col++;
 		if (c == '\n') checkLocation(current_row, current_col);
+		current_col = clamp(current_col, 1, MAP_COL - 2);
+		current_row = clamp(current_row, 1, MAP_ROW - 2);
 		if (!(current_row == last_row and current_col == last_col)) {
 			print_world(current_row,current_col);
 			last_row = current_row;
