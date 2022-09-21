@@ -20,23 +20,47 @@ const double INVENTORY_BORDER_Y = 1.00 - MAP_BORDER_Y;
 
 
 vector<string> world_map = {
-	"********************************************",
-	"* r                                        *",
-	"* r                                        *",
-	"* r                                        *",
-	"* r     x                 z                *",
-	"* r                                        *",
-	"* r                                        *",
-	"* r     |               r                  *",
-	"* r     |                                  *",
-	"* r                      z                 *",
-	"* r      TT                                *",
-	"* r                          |             *",
-	"* r                            |           *",
-	"* r                            |           *",
-	"* r                                        *",
-	"* r                                        *",
-	"********************************************"
+	"******************************************************************************************************************",
+	"* r                                                                                                              *",
+	"* r                                                                                                              *",
+	"* r                                                                                                              *",
+	"* r                                            /////                      /   |                                  *",
+	"* r                                                                                                              *",
+	"* r                                                                                                              *",
+	"* r                                                                                                              *",
+	"* r                                            /////                      /   |                                  *",
+	"*                                                                      r       TT                                *",
+	"* r                                                                                                              *",
+	"*                                                                      r       TT                                *",
+	"* r                                                                                                              *",
+	"*                                                                      r       TT                                *",
+	"*                                                                      r       TT                                *",
+	"* r                                                                                                              *",
+	"* r                                                                                                              *",
+	"* r                                                                                                              *",
+	"* r                                                                                                              *",
+	"* r                                            /////                      /   |                                  *",
+	"* r                                                                                                              *",
+	"* r                                                                                                              *",
+	"* r                                                                                                              *",
+	"* r                                                                                                              *",
+	"* r                                                                                                              *",
+	"* r                                            /////                      /   |                                  *",
+	"* r                                                                                                              *",
+	"* r                                                                                                              *",
+	"* r                                                                                                              *",
+	"* r                                                                                                              *",
+	"* r                                                                                                              *",
+	"* r                                                                                                              *",
+	"* r                                                                                                              *",
+	"* r                                                                                                              *",
+	"* r                                                                                                              *",
+	"* r                                                                                                              *",
+	"* r                                                                                                              *",
+	"* r                                            /////                      /   |                                  *",
+	"* r                      z                                                                                       *",
+	"*                                                                      r       TT                                *",
+	"******************************************************************************************************************"
 };
 
 vector<string> tasks = {"Task 1", "Task 2", "Task 3", "Task 4","Task 5"};
@@ -182,11 +206,32 @@ void set_world_location(size_t current_row, size_t current_col, char c) {
 }
 
 void print_world(size_t player_row, size_t player_col) {
+	size_t map_literal_x = COLS * MAP_BORDER_X - 2;
+	size_t start_x = player_col - map_literal_x / 2;
+	size_t end_x = player_col + map_literal_x / 2;
 
+	size_t map_literal_y = ROWS * MAP_BORDER_Y - 2;
+	size_t start_y = player_row - map_literal_y / 2;
+	size_t end_y = player_row + map_literal_y / 2;
+	
+	if (start_x < 0){
+		end_x = end_x - start_x;
+		start_x = 0;
+	}
+	if(end_x > world_map.at(0).size() - 1) {
+		start_x = start_x - (end_x - (world_map.at(0).size() - 1));
+	}
+	if(start_y < 0) {
+		start_y = end_y - start_y;
+	}
+
+	if(end_y > world_map.size() - 1) {
+		start_y = start_y - (end_y - (world_map.size() - 1));
+	}
 	// clearscreen();
-	for (size_t row = 0; row < world_map.size(); row++) {
-		movecursor(5 + row,5);
-		for (size_t col = 0; col < world_map.at(row).size(); col++) {
+	for (size_t row = start_y; row < end_y; row++) {
+		movecursor(start_y + row,start_x);
+		for (size_t col = start_x; col < end_x; col++) {
 			if (row == player_row and col == player_col) cout << RED << '@' << RESET;
 			else if (world_map.at(row).at(col) == '*') cout << BLUE << world_map.at(row).at(col) << RESET;
 			else
@@ -237,7 +282,6 @@ void print_screen() {
 	print_map_border();
 	print_task_list();
 	print_inventory();
-	dialog("This is pretty cool");
 
 }
 
@@ -274,4 +318,3 @@ int main() {
 	movecursor(0,0);
 	cout << RESET;
 }
-
