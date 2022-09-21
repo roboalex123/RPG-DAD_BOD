@@ -266,6 +266,7 @@ int main() {
 			last_row = current_row;
 			last_col = current_col;
 		}	
+		usleep(1'000'000/FPS);
 	}
 	clearscreen();
 	set_raw_mode(false);
