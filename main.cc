@@ -20,6 +20,7 @@ const double INVENTORY_BORDER_Y = 1.00 - MAP_BORDER_Y;
 
 
 vector<string> world_map = {
+/*
 	"********************************************",
 	"* r                                        *",
 	"* r                                        *",
@@ -36,8 +37,40 @@ vector<string> world_map = {
 	"* r                            |           *",
 	"* r                                        *",
 	"* r                                        *",
-	"********************************************"
+	"********************************************
 };
+
+*/
+
+"**************************************************************",
+"*------------------------------------------------------------*",
+"*  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==*",
+"*------------------------------------------------------------*",
+"*                                                            *",
+"*                       (Front Yard)                         *",
+"*                                                            *",
+"*+---------+----[  ]-----------------+---+/////[      ]/////+*",
+"*|(Kitchen)|              |(Bathroom)|[]                    |*",
+"*|        /               |          |[]                    |*",
+"*|       /                |T         |                      |*",
+"*| r    ^     W           |          |                      |*",
+"*|      v                 |          |                      |*",
+"*|      |                 |        S |       (Garage)       |*",
+"*|------+          -------+---[ ]----+-[ ]------------------+*",
+"*|                                          (Hall way)      |*",
+"*|            /----[ ]----+---[ ]----+-[ ]------------------+*",
+"*|           /            |          |                      |*",
+"*+--[ ]-----+   (not a)   |          |   (Master Bedroom)   |*",
+"*|          |  (man cave) |          |                      |*",
+"*|          |             | (Office) |                      |*",
+"*|          +-------------+----------+------------------[ ]-+*",
+"*|                                                          |*",
+"*|                       (Back Yard)                        |*",
+"*|                                                          |*",
+"*+----------------------------------------------------------+*",
+"**************************************************************"
+};
+
 
 vector<string> tasks = {"Task 1", "Task 2", "Task 3", "Task 4","Task 5"};
 vector<bool> completedTask(5);
@@ -185,10 +218,15 @@ void print_world(size_t player_row, size_t player_col) {
 
 	// clearscreen();
 	for (size_t row = 0; row < world_map.size(); row++) {
-		movecursor(5 + row,5);
+		movecursor(2 + row,2);
 		for (size_t col = 0; col < world_map.at(row).size(); col++) {
-			if (row == player_row and col == player_col) cout << RED << '@' << RESET;
+			if (row == player_row and col == player_col) cout << BOLDCYAN << '@' << RESET;
 			else if (world_map.at(row).at(col) == '*') cout << BLUE << world_map.at(row).at(col) << RESET;
+			else if (world_map.at(row).at(col) == '=') cout << BOLDYELLOW << world_map.at(row).at(col) << RESET;
+			else if (world_map.at(row).at(col) == 'T') cout << BOLDRED << world_map.at(row).at(col) << RESET;
+			else if (world_map.at(row).at(col) == '|') cout << GREEN << world_map.at(row).at(col) << RESET;
+			else if (world_map.at(row).at(col) == '[') cout << BOLDGREEN << world_map.at(row).at(col) << RESET;
+			else if (world_map.at(row).at(col) == ']') cout << BOLDGREEN << world_map.at(row).at(col) << RESET;
 			else
 				cout << world_map.at(row).at(col);
 		}
