@@ -4,10 +4,7 @@
 //URL to cover art and music:
 
 /* Includes */
-#include "/public/read.h"
-#include "/public/colors.h"
 #include "task.h"
-#include <iostream>
 #include <vector>
 using namespace std;
 
@@ -27,35 +24,36 @@ vector<string> world_map = {
 "*  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==*",
 "*------------------------------------------------------------*",
 "*                                                            *",
-"*                       (Front Yard)                         *",
+"*        ?              (Front Yard)                         *",
 "*                                                            *",
 "*+---------+----[  ]-----------------+---+/////[      ]/////+*",
 "*|(Kitchen)|              |(Bathroom)|[]                    |*",
 "*|        /               |          |[]                    |*",
-"*|       /                |T         |                      |*",
-"*| r    ^     W           |          |                      |*",
+"*|       /                | #        |                      |*",
+"*|      ^                 |          |                      |*",
 "*|      v                 |          |                      |*",
-"*|      |                 |        S |       (Garage)       |*",
+"*|      |                 |          |       (Garage)       |*",
 "*|------+          -------+---[ ]----+-[ ]------------------+*",
 "*|                                          (Hall way)      |*",
 "*|            /----[ ]----+---[ ]----+-[ ]------------------+*",
 "*|           /            |          |                      |*",
-"*+--[ ]-----+   (not a)   |          |   (Master Bedroom)   |*",
+"*+--[ ]-----+   (not a)   |       %  |   (Master Bedroom)   |*",
 "*|          |  (man cave) |          |                      |*",
 "*|          |             | (Office) |                      |*",
 "*|          +-------------+----------+------------------[ ]-+*",
-"*|                                                          |*",
+"*|   &                                                      |*",
 "*|                       (Back Yard)                        |*",
-"*|                                                          |*",
+"*|                                               $          |*",
 "*+----------------------------------------------------------+*",
 "**************************************************************"
 };
 
 /* Declare Task & Inventory Related Vectors */
-vector<string> tasks = {"Build Ikea Bookshelf", "Task 2", "Task 3", "Task 4","Task 5"};
-vector<bool> completedTask(5);
+vector<string> tasks = {"(%) Build Ikea Bookshelf", "(#) Unclog toilet", "(?) Mow Lawn", "(&) Get rid of hornet nest","($) BBQ burgers for dinner"};
+vector<int> completedTask(5);
 vector<string> inventory(0);
 
+int failedAttempts = 0;
 
 /* Bottom File Function Declarations */
 void dialog(string toPrint); 
@@ -153,7 +151,8 @@ void print_task_list() {
 
 	for (size_t i = 0; i < tasks.size(); i++) {
 			toPrint += tasks.at(i); 
-		if(completedTask.at(i)) cout << GREEN << toPrint << RESET;
+		if(completedTask.at(i) == 0) cout << WHITE << toPrint << RESET;
+		else if(completedTask.at(i) == 2) cout << GREEN << toPrint << RESET;
 		else cout << RED << toPrint << RESET;
 		toPrint = "- ";
 		contentStartY += 1;
@@ -213,8 +212,11 @@ void print_world(size_t player_row, size_t player_col) {
 			if (row == player_row and col == player_col) cout << BOLDCYAN << '@' << RESET;
 			else if (world_map.at(row).at(col) == '*') cout << BLUE << world_map.at(row).at(col) << RESET;
 			else if (world_map.at(row).at(col) == '=') cout << BOLDYELLOW << world_map.at(row).at(col) << RESET;
-			else if (world_map.at(row).at(col) == 'T') cout << BOLDRED << world_map.at(row).at(col) << RESET;
-			else if (world_map.at(row).at(col) == '|') cout << GREEN << world_map.at(row).at(col) << RESET;
+			else if (world_map.at(row).at(col) == '%') cout << BOLDRED << world_map.at(row).at(col) << RESET;
+			else if (world_map.at(row).at(col) == '#') cout << BOLDRED << world_map.at(row).at(col) << RESET;
+			else if (world_map.at(row).at(col) == '?') cout << BOLDRED << world_map.at(row).at(col) << RESET;
+			else if (world_map.at(row).at(col) == '&') cout << BOLDRED << world_map.at(row).at(col) << RESET;
+			else if (world_map.at(row).at(col) == '$') cout << BOLDRED << world_map.at(row).at(col) << RESET;
 			else if (world_map.at(row).at(col) == '[') cout << BOLDGREEN << world_map.at(row).at(col) << RESET;
 			else if (world_map.at(row).at(col) == ']') cout << BOLDGREEN << world_map.at(row).at(col) << RESET;
 			else cout << world_map.at(row).at(col);
@@ -256,6 +258,7 @@ int main() {
 		if (c == 'D' or c == RIGHT_ARROW) current_col++;
 		if (c == '\n') {
 			checkLocation(current_row, current_col);
+			current_col++;
 			print_world(current_row,current_col);
 		}
 		current_col = clamp(current_col, 1, MAP_COL - 2);
@@ -321,20 +324,53 @@ void set_world_location(size_t current_row, size_t current_col, char c) {
 	world_map.at(current_row).at(current_col) = c;
 }
 
+void raw_mode_off(){
+	set_raw_mode(false);
+	show_cursor(true);
+	cout << RESET;
+}
+void raw_mode_on(int taskNum, int row, int col){
+	if(completedTask.at(taskNum) == 2) world_map.at(row).at(col) = ' ';
+	set_raw_mode(true);
+	show_cursor(false);
+	print_screen();
+}
+
 void checkLocation(auto row, auto col) {//FIXME add other task (NEED 3 more)
 	char currLoc = world_map.at(row).at(col);
-	if (currLoc == 'r') completedTask.at(0) = (completedTask.at(0) == true) ? false : true;
-	else if (currLoc == 's') completedTask.at(1) = (completedTask.at(1) == true) ? false: true;
-	else if (currLoc == 'T') {
-		set_raw_mode(false);
-		show_cursor(true);
-		cout << RESET;
+	if (currLoc == '%') {
+		completedTask.at(0);
+		raw_mode_off();	
 		completedTask.at(0) = ikeaBook();
-		world_map.at(row).at(col) = ' ';
-		set_raw_mode(true);
-		show_cursor(false);
-		movecursor(0,0);
-		print_screen();
+		raw_mode_on(0, row, col);
+		return;
+	}
+	else if (currLoc == '#'){ 
+		completedTask.at(1);
+		raw_mode_off();	
+		completedTask.at(1) = toiletClog();
+		raw_mode_on(1, row, col);
+		return;
+	}
+	else if (currLoc == '?') {
+		completedTask.at(2);
+		raw_mode_off();	
+		completedTask.at(2) = mowLawn();
+		raw_mode_on(2, row, col);
+		return;
+	}
+	else if (currLoc == '&') {
+		completedTask.at(3);
+		raw_mode_off();	
+		completedTask.at(3) = hornetNest();
+		raw_mode_on(3, row, col);
+		return;
+	}
+	else if (currLoc == '$') {
+		completedTask.at(4);
+		raw_mode_off();	
+		completedTask.at(4) = bbq();
+		raw_mode_on(4, row, col);
 		return;
 	}
 	print_task_list();

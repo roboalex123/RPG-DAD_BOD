@@ -26,7 +26,7 @@ int ikeaBook(){
 	while(true){//question 1
 		if (chances <= 0){
 			output = "Task failed, good luck next time...";
-			movecursor(++inner_yStart,centerX(output));
+			movecursor(yStart,centerX(output));
 			cout << output << endl;
 			show_cursor(true);
 			return 1;
@@ -81,7 +81,7 @@ int ikeaBook(){
 	while(true){//question 2
 		if (chances <= 0){
 			output = "Task failed, good luck next time...";
-			movecursor(++inner_yStart,centerX(output));
+			movecursor(yStart,centerX(output));
 			cout << output << endl;
 			show_cursor(true);
 			return 1;
@@ -130,7 +130,7 @@ int ikeaBook(){
 	while(true){//question 3
 		if (chances <= 0){
 			output = "Task failed, good luck next time...";
-			movecursor(++inner_yStart,centerX(output));
+			movecursor(yStart,centerX(output));
 			cout << output << endl;
 			show_cursor(true);
 			return 1;
@@ -179,7 +179,7 @@ int ikeaBook(){
 	return 2;
 }
 
-int tolietClog(){//task 2
+int toiletClog(){//task 2
 	clearscreen();
 	int yStart = rows / 2;
 	int chances = 3;
@@ -196,7 +196,7 @@ int tolietClog(){//task 2
 	while(true){//question 1
 		if (chances <= 0){
 			output = "Task failed, good luck next time...";
-			movecursor(++inner_yStart,centerX(output));
+			movecursor(yStart,centerX(output));
 			cout << output << endl;
 			show_cursor(true);
 			return 1;
@@ -251,7 +251,7 @@ int tolietClog(){//task 2
 	while(true){//question 2
 		if (chances <= 0){
 			output = "Task failed, good luck next time...";
-			movecursor(++inner_yStart,centerX(output));
+			movecursor(yStart,centerX(output));
 			cout << output << endl;
 			show_cursor(true);
 			return 1;
@@ -300,7 +300,7 @@ int tolietClog(){//task 2
 	while(true){//question 3
 		if (chances <= 0){
 			output = "Task failed, good luck next time...";
-			movecursor(++inner_yStart,centerX(output));
+			movecursor(yStart,centerX(output));
 			cout << output << endl;
 			show_cursor(true);
 			return 1;
@@ -366,7 +366,7 @@ int mowLawn(){//task 3
 	while(true){//question 1
 		if (chances <= 0){
 			output = "Task failed, good luck next time...";
-			movecursor(++inner_yStart,centerX(output));
+			movecursor(yStart,centerX(output));
 			cout << output << endl;
 			show_cursor(true);
 			return 1;
@@ -421,7 +421,7 @@ int mowLawn(){//task 3
 	while(true){//question 2
 		if (chances <= 0){
 			output = "Task failed, good luck next time...";
-			movecursor(++inner_yStart,centerX(output));
+			movecursor(yStart,centerX(output));
 			cout << output << endl;
 			show_cursor(true);
 			return 1;
@@ -470,7 +470,7 @@ int mowLawn(){//task 3
 	while(true){//question 3
 		if (chances <= 0){
 			output = "Task failed, good luck next time...";
-			movecursor(++inner_yStart,centerX(output));
+			movecursor(yStart,centerX(output));
 			cout << output << endl;
 			show_cursor(true);
 			return 1;
@@ -537,7 +537,7 @@ int hornetNest(){//task 4
 	while(true){//question 1
 		if (chances <= 0){
 			output = "Task failed, good luck next time...";
-			movecursor(++inner_yStart,centerX(output));
+			movecursor(yStart,centerX(output));
 			cout << output << endl;
 			show_cursor(true);
 			return 1;
@@ -592,7 +592,7 @@ int hornetNest(){//task 4
 	while(true){//question 2
 		if (chances <= 0){
 			output = "Task failed, good luck next time...";
-			movecursor(++inner_yStart,centerX(output));
+			movecursor(yStart,centerX(output));
 			cout << output << endl;
 			show_cursor(true);
 			return 1;
@@ -641,7 +641,7 @@ int hornetNest(){//task 4
 	while(true){//question 3
 		if (chances <= 0){
 			output = "Task failed, good luck next time...";
-			movecursor(++inner_yStart,centerX(output));
+			movecursor(yStart,centerX(output));
 			cout << output << endl;
 			show_cursor(true);
 			return 1;
@@ -707,7 +707,7 @@ int bbq(){//task 5
 	while(true){//question 1
 		if (chances <= 0){
 			output = "Task failed, good luck next time...";
-			movecursor(++inner_yStart,centerX(output));
+			movecursor(yStart,centerX(output));
 			cout << output << endl;
 			show_cursor(true);
 			return 1;
@@ -762,7 +762,7 @@ int bbq(){//task 5
 	while(true){//question 2
 		if (chances <= 0){
 			output = "Task failed, good luck next time...";
-			movecursor(++inner_yStart,centerX(output));
+			movecursor(yStart,centerX(output));
 			cout << output << endl;
 			show_cursor(true);
 			return 1;
@@ -811,7 +811,7 @@ int bbq(){//task 5
 	while(true){//question 3
 		if (chances <= 0){
 			output = "Task failed, good luck next time...";
-			movecursor(++inner_yStart,centerX(output));
+			movecursor(yStart,centerX(output));
 			cout << output << endl;
 			show_cursor(true);
 			return 1;
