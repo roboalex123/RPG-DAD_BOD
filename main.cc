@@ -1,15 +1,16 @@
-//Fill out this comment with your names and which bullet points you did
-//Partners: Sayre, Voss, Heins
+//Partners: Voss, Sayre, Heins, Henson
 //Bullet Points:
 //Extra Credit:
 //URL to cover art and music:
 
+/* Includes */
 #include "/public/read.h"
 #include "/public/colors.h"
 #include <iostream>
 #include <vector>
 using namespace std;
 
+/* Global Constant Declarations */
 const auto [ROWS, COLS] = get_terminal_size();
 const double MAP_BORDER_X = 0.70;
 const double MAP_BORDER_Y = 0.75;
@@ -18,30 +19,8 @@ const double TASK_BORDER_Y =  MAP_BORDER_Y;
 const double INVENTORY_BORDER_X = 1.00;
 const double INVENTORY_BORDER_Y = 1.00 - MAP_BORDER_Y;
 
-
+/* Declare Map */
 vector<string> world_map = {
-/*
-	"********************************************",
-	"* r                                        *",
-	"* r                                        *",
-	"* r                                        *",
-	"* r     x                 z                *",
-	"* r                                        *",
-	"* r                                        *",
-	"* r     |               r                  *",
-	"* r     |                                  *",
-	"* r                      z                 *",
-	"* r      TT                                *",
-	"* r                          |             *",
-	"* r                            |           *",
-	"* r                            |           *",
-	"* r                                        *",
-	"* r                                        *",
-	"********************************************
-};
-
-*/
-
 "**************************************************************",
 "*------------------------------------------------------------*",
 "*  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==*",
@@ -71,10 +50,24 @@ vector<string> world_map = {
 "**************************************************************"
 };
 
-
+/* Declare Task & Inventory Related Vectors */
 vector<string> tasks = {"Task 1", "Task 2", "Task 3", "Task 4","Task 5"};
 vector<bool> completedTask(5);
 vector<string> inventory(0);
+
+
+/* Bottom File Function Declarations */
+void dialog(string toPrint); 
+void preExit(); 
+void print_screen(); 
+void tooSmall();
+bool screenSizeBad(); 
+
+//Map
+void checkLocation(auto row, auto col) ;
+char get_world_location(size_t current_row, size_t current_col); 
+void set_world_location(size_t current_row, size_t current_col, char c); 
+
 
 void print_inventory() {
 	int inventory_literal_x = COLS * INVENTORY_BORDER_X;
@@ -109,6 +102,7 @@ void print_inventory() {
 		movecursor(y_start, x_start);
 	}
 }
+
 void print_task_list() {
 	int task_literal_x = COLS * TASK_BORDER_X;
 	int x_start = COLS - task_literal_x;
@@ -165,6 +159,7 @@ void print_task_list() {
 		movecursor(contentStartY, contentStartX);
 	}
 }
+
 void print_map_border() {
 	int map_literal_x = COLS * MAP_BORDER_X;
 	int x_start = 0;
@@ -201,18 +196,8 @@ void print_map_border() {
 	}
 
 }
-//FIXME functions for Kerneys map
-char get_world_location(size_t current_row, size_t current_col) {
-	if (current_row >= world_map.size()) return ' ';
-	if (current_col >= world_map.at(current_row).size()) return ' ';
-	return world_map.at(current_row).at(current_col);
-}
 
-void set_world_location(size_t current_row, size_t current_col, char c) {
-	if (current_row >= world_map.size()) return;
-	if (current_col >= world_map.at(current_row).size()) return;
-	world_map.at(current_row).at(current_col) = c;
-}
+
 
 void print_world(size_t player_row, size_t player_col) {
 	int map_border_x = COLS * MAP_BORDER_X;
@@ -221,7 +206,6 @@ void print_world(size_t player_row, size_t player_col) {
 	int x_start = (map_border_x - world_map.at(0).size()) / 2;
 	int y_start = (map_border_y - world_map.size()) / 2;
 
-	// clearscreen();
 	for (size_t row = 0; row < world_map.size(); row++) {
 		movecursor(y_start + row, x_start);
 		for (size_t col = 0; col < world_map.at(row).size(); col++) {
@@ -232,22 +216,10 @@ void print_world(size_t player_row, size_t player_col) {
 			else if (world_map.at(row).at(col) == '|') cout << GREEN << world_map.at(row).at(col) << RESET;
 			else if (world_map.at(row).at(col) == '[') cout << BOLDGREEN << world_map.at(row).at(col) << RESET;
 			else if (world_map.at(row).at(col) == ']') cout << BOLDGREEN << world_map.at(row).at(col) << RESET;
-			else
-				cout << world_map.at(row).at(col);
+			else cout << world_map.at(row).at(col);
 		}
 		cout << endl;
 	}
-/*	
-	for (size_t i = 0; i < world_map.size(); i++) {
-		movecursor(5 + i, 5);
-		for (size_t j = 0; j < world_map.at(i).size(); j++) {
-			if(world_map.at(i).at(j) == '@')cout << RED << world_map.at(i).at(j)<< RESET;
-			else if (world_map.at(i).at(j) == '*') cout << BLUE << world_map.at(i).at(j) << RESET;
-			else cout << world_map.at(i).at(j);
-		}
-		cout << endl;
-	}
-*/	
 }
 
 void addInventoryItem(string inv) {
@@ -260,15 +232,41 @@ void addInventoryItem(string inv) {
 	return;
 }
 
-void checkLocation(auto row, auto col) {//FIXME add other task (NEED 3 more)
-	char currLoc = world_map.at(row).at(col);
-	if (currLoc == 'r') completedTask.at(0) = (completedTask.at(0) == true) ? false : true;
-	else if (currLoc == 's') completedTask.at(1) = (completedTask.at(1) == true) ? false: true;
-	print_task_list();
-	return;
+
+
+
+int main() {
+	if (screenSizeBad()) tooSmall();
+
+	print_screen();
+	const int MAP_ROW = world_map.size();
+	const int MAP_COL = world_map.at(0).size(); //ROWS > MAP_ROW
+	const int FPS = 60;
+	int current_row = MAP_ROW/2, current_col = MAP_COL/2;//row to current_row
+	int last_row = -1, last_col = -1;
+	set_raw_mode(true);
+	show_cursor(false);
+	while (true) {
+		int c = toupper(quick_read());
+		if (c == 'Q') break;
+		if (c == 'W' or c == UP_ARROW) current_row--;
+		if (c == 'S' or c == DOWN_ARROW) current_row++;
+		if (c == 'A' or c == LEFT_ARROW) current_col--;
+		if (c == 'D' or c == RIGHT_ARROW) current_col++;
+		if (c == '\n') checkLocation(current_row, current_col);
+		current_col = clamp(current_col, 1, MAP_COL - 2);
+		current_row = clamp(current_row, 1, MAP_ROW - 2);
+		if (!(current_row == last_row and current_col == last_col)) {
+			print_world(current_row,current_col);
+			last_row = current_row;
+			last_col = current_col;
+		}	
+		usleep(1'000'000/FPS);
+	}
+	preExit();
 }
 
-void dialog(string toPrint){
+void dialog(string toPrint) {
 	movecursor(ROWS/2, (COLS - toPrint.size()) /2);
 	system(("echo " + toPrint + " | lolcat").c_str());
 
@@ -307,34 +305,22 @@ void tooSmall() {
 	preExit();
 }
 
-int main() {
-	if (screenSizeBad()) tooSmall();
-
-	print_screen();
-	const int MAP_ROW = world_map.size();
-	const int MAP_COL = world_map.at(0).size(); //ROWS > MAP_ROW
-	const int FPS = 60;
-	int current_row = MAP_ROW/2, current_col = MAP_COL/2;//row to current_row
-	int last_row = -1, last_col = -1;
-	set_raw_mode(true);
-	show_cursor(false);
-	while (true) {
-		int c = toupper(quick_read());
-		if (c == 'Q') break;
-		if (c == 'W' or c == UP_ARROW) current_row--;
-		if (c == 'S' or c == DOWN_ARROW) current_row++;
-		if (c == 'A' or c == LEFT_ARROW) current_col--;
-		if (c == 'D' or c == RIGHT_ARROW) current_col++;
-		if (c == '\n') checkLocation(current_row, current_col);
-		current_col = clamp(current_col, 1, MAP_COL - 2);
-		current_row = clamp(current_row, 1, MAP_ROW - 2);
-		if (!(current_row == last_row and current_col == last_col)) {
-			print_world(current_row,current_col);
-			last_row = current_row;
-			last_col = current_col;
-		}	
-		usleep(1'000'000/FPS);
-	}
-	preExit();
+char get_world_location(size_t current_row, size_t current_col) {
+	if (current_row >= world_map.size()) return ' ';
+	if (current_col >= world_map.at(current_row).size()) return ' ';
+	return world_map.at(current_row).at(current_col);
 }
 
+void set_world_location(size_t current_row, size_t current_col, char c) {
+	if (current_row >= world_map.size()) return;
+	if (current_col >= world_map.at(current_row).size()) return;
+	world_map.at(current_row).at(current_col) = c;
+}
+
+void checkLocation(auto row, auto col) {//FIXME add other task (NEED 3 more)
+	char currLoc = world_map.at(row).at(col);
+	if (currLoc == 'r') completedTask.at(0) = (completedTask.at(0) == true) ? false : true;
+	else if (currLoc == 's') completedTask.at(1) = (completedTask.at(1) == true) ? false: true;
+	print_task_list();
+	return;
+}
