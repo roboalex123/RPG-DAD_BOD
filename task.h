@@ -14,7 +14,8 @@ bool ikeaBook(){
 	int yStart = rows / 2;
 	int chances = 3;
 
-	string output = "Okay.... I guess I will build this stupid bookcase";
+	string output;
+	output = "Okay.... I guess I will build this stupid bookcase";
 	movecursor(yStart,centerX(output));
 	cout << output;
 	usleep(2'500'000);

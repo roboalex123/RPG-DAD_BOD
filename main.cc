@@ -6,6 +6,7 @@
 /* Includes */
 #include "/public/read.h"
 #include "/public/colors.h"
+#include "task.h"
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -51,7 +52,7 @@ vector<string> world_map = {
 };
 
 /* Declare Task & Inventory Related Vectors */
-vector<string> tasks = {"Task 1", "Task 2", "Task 3", "Task 4","Task 5"};
+vector<string> tasks = {"Build Ikea Bookshelf", "Task 2", "Task 3", "Task 4","Task 5"};
 vector<bool> completedTask(5);
 vector<string> inventory(0);
 
@@ -253,7 +254,10 @@ int main() {
 		if (c == 'S' or c == DOWN_ARROW) current_row++;
 		if (c == 'A' or c == LEFT_ARROW) current_col--;
 		if (c == 'D' or c == RIGHT_ARROW) current_col++;
-		if (c == '\n') checkLocation(current_row, current_col);
+		if (c == '\n') {
+			checkLocation(current_row, current_col);
+			print_world(current_row,current_col);
+		}
 		current_col = clamp(current_col, 1, MAP_COL - 2);
 		current_row = clamp(current_row, 1, MAP_ROW - 2);
 		if (!(current_row == last_row and current_col == last_col)) {
@@ -321,6 +325,18 @@ void checkLocation(auto row, auto col) {//FIXME add other task (NEED 3 more)
 	char currLoc = world_map.at(row).at(col);
 	if (currLoc == 'r') completedTask.at(0) = (completedTask.at(0) == true) ? false : true;
 	else if (currLoc == 's') completedTask.at(1) = (completedTask.at(1) == true) ? false: true;
+	else if (currLoc == 'T') {
+		set_raw_mode(false);
+		show_cursor(true);
+		cout << RESET;
+		completedTask.at(0) = ikeaBook();
+		world_map.at(row).at(col) = ' ';
+		set_raw_mode(true);
+		show_cursor(false);
+		movecursor(0,0);
+		print_screen();
+		return;
+	}
 	print_task_list();
 	return;
 }
