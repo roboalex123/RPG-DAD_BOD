@@ -215,10 +215,15 @@ void set_world_location(size_t current_row, size_t current_col, char c) {
 }
 
 void print_world(size_t player_row, size_t player_col) {
+	int map_border_x = COLS * MAP_BORDER_X;
+	int map_border_y = ROWS * MAP_BORDER_Y;
+
+	int x_start = (map_border_x - world_map.at(0).size()) / 2;
+	int y_start = (map_border_y - world_map.size()) / 2;
 
 	// clearscreen();
 	for (size_t row = 0; row < world_map.size(); row++) {
-		movecursor(2 + row,2);
+		movecursor(y_start + row, x_start);
 		for (size_t col = 0; col < world_map.at(row).size(); col++) {
 			if (row == player_row and col == player_col) cout << BOLDCYAN << '@' << RESET;
 			else if (world_map.at(row).at(col) == '*') cout << BLUE << world_map.at(row).at(col) << RESET;
@@ -264,7 +269,7 @@ void checkLocation(auto row, auto col) {//FIXME add other task (NEED 3 more)
 }
 
 void dialog(string toPrint){
-	movecursor(15,15);
+	movecursor(ROWS/2, (COLS - toPrint.size()) /2);
 	system(("echo " + toPrint + " | lolcat").c_str());
 
 }
@@ -275,11 +280,35 @@ void print_screen() {
 	print_map_border();
 	print_task_list();
 	print_inventory();
-	dialog("This is pretty cool");
+}
+
+bool screenSizeBad() {
+	int mapSizeY = world_map.size(), mapSizeX = world_map.at(0).size();
+	int mapBorderSizeY = ROWS * MAP_BORDER_Y, mapBorderSizeX = COLS * MAP_BORDER_X;
+
+	if (mapSizeY > mapBorderSizeY or mapSizeX > mapBorderSizeX) return true;
+	else return false;
+}
+
+void preExit() {
+	clearscreen();
+	set_raw_mode(false);
+	show_cursor(true);
+	movecursor(0,0);
+	cout << RESET;
+	exit(0);
 
 }
 
+void tooSmall() {
+	clearscreen();
+	dialog("Please make your terminal window bigger and try again.");
+	usleep(2'500'000);
+	preExit();
+}
+
 int main() {
+	if (screenSizeBad()) tooSmall();
 
 	print_screen();
 	const int MAP_ROW = world_map.size();
@@ -306,10 +335,6 @@ int main() {
 		}	
 		usleep(1'000'000/FPS);
 	}
-	clearscreen();
-	set_raw_mode(false);
-	show_cursor(true);
-	movecursor(0,0);
-	cout << RESET;
+	preExit();
 }
 
