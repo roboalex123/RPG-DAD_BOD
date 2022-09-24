@@ -8,7 +8,7 @@
 #include <vector>
 using namespace std;
 
-/* Global Constant Declarations */
+/* Global Declarations */
 const auto [ROWS, COLS] = get_terminal_size();
 const double MAP_BORDER_X = 0.70;
 const double MAP_BORDER_Y = 0.75;
@@ -16,36 +16,38 @@ const double TASK_BORDER_X = 1.00 - MAP_BORDER_X;
 const double TASK_BORDER_Y =  MAP_BORDER_Y;
 const double INVENTORY_BORDER_X = 1.00;
 const double INVENTORY_BORDER_Y = 1.00 - MAP_BORDER_Y;
+const int LOSE_CONDITION = 3;
+int tasksLost = 0;
 
 /* Declare Map */
 vector<string> world_map = {
-"**************************************************************",
-"*------------------------------------------------------------*",
-"*  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==*",
-"*------------------------------------------------------------*",
-"*                                                            *",
-"*        ?              (Front Yard)                         *",
-"*                                                            *",
-"*+---------+----[  ]-----------------+---+/////[      ]/////+*",
-"*|(Kitchen)|              |(Bathroom)|[]                    |*",
-"*|        /               |          |[]                    |*",
-"*|       /                | #        |                      |*",
-"*|      ^                 |          |                      |*",
-"*|      v                 |          |                      |*",
-"*|      |                 |          |       (Garage)       |*",
-"*|------+          -------+---[ ]----+-[ ]------------------+*",
-"*|                                          (Hall way)      |*",
-"*|            /----[ ]----+---[ ]----+-[ ]------------------+*",
-"*|           /            |          |                      |*",
-"*+--[ ]-----+   (not a)   |       %  |   (Master Bedroom)   |*",
-"*|          |  (man cave) |          |                      |*",
-"*|          |             | (Office) |                      |*",
-"*|          +-------------+----------+------------------[ ]-+*",
-"*|   &                                                      |*",
-"*|                       (Back Yard)                        |*",
-"*|                                               $          |*",
-"*+----------------------------------------------------------+*",
-"**************************************************************"
+	"**************************************************************",
+	"*------------------------------------------------------------*",
+	"*  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==*",
+	"*------------------------------------------------------------*",
+	"*                                                            *",
+	"*        ?              (Front Yard)                         *",
+	"*                                                            *",
+	"*+---------+----[  ]-----------------+---+/////[      ]/////+*",
+	"*|(Kitchen)|              |(Bathroom)|[]                    |*",
+	"*|        /               |          |[]                    |*",
+	"*|       /                | #        |                      |*",
+	"*|      ^                 |          |                      |*",
+	"*|      v                 |          |                      |*",
+	"*|      |                 |          |       (Garage)       |*",
+	"*|------+          -------+---[ ]----+-[ ]------------------+*",
+	"*|                                          (Hall way)      |*",
+	"*|            /----[ ]----+---[ ]----+-[ ]------------------+*",
+	"*|           /            |          |                      |*",
+	"*+--[ ]-----+   (not a)   |       %  |   (Master Bedroom)   |*",
+	"*|          |  (man cave) |          |                      |*",
+	"*|          |             | (Office) |                      |*",
+	"*|          +-------------+----------+------------------[ ]-+*",
+	"*|   &                                                      |*",
+	"*|                       (Back Yard)                        |*",
+	"*|                                               $          |*",
+	"*+----------------------------------------------------------+*",
+	"**************************************************************"
 };
 
 /* Declare Task & Inventory Related Vectors */
@@ -67,6 +69,12 @@ void checkLocation(auto row, auto col) ;
 char get_world_location(size_t current_row, size_t current_col); 
 void set_world_location(size_t current_row, size_t current_col, char c); 
 
+void print_status(int max_x, int max_y, int start_y) {
+	movecursor(start_y, max_x - 45);
+	cout << "Task Status:" << endl;
+	movecursor(++start_y, max_x - 45);
+	cout << MAGENTA << "You have failed " << tasksLost << " / " << LOSE_CONDITION << " max before you lose." << RESET << endl;
+}
 
 void print_inventory() {
 	int inventory_literal_x = COLS * INVENTORY_BORDER_X;
@@ -74,6 +82,9 @@ void print_inventory() {
 
 	int inventory_literal_y = ROWS * INVENTORY_BORDER_Y;
 	int y_start = ROWS - inventory_literal_y;
+
+	int OGcontentStartX = x_start + 3;
+	int OGcontentStartY = y_start + 2;
 
 	movecursor(0, 0);
 	movecursor(y_start, x_start);
@@ -100,7 +111,31 @@ void print_inventory() {
 		y_start++;
 		movecursor(y_start, x_start);
 	}
+
+
+	string toPrint = "- ";
+	int contentStartX = OGcontentStartX, contentStartY = OGcontentStartY;
+	movecursor(contentStartY, contentStartX);
+	cout << "Inventory:";
+	cout.flush();
+	contentStartY += 1;
+	movecursor(contentStartY, contentStartX);
+
+	for (size_t i = 0; i < inventory.size(); i++) {
+		if (contentStartY >= ROWS - 3) {
+			contentStartY = OGcontentStartY;
+			contentStartX += 30;
+		}
+		toPrint += inventory.at(i); 
+		cout << GREEN << toPrint << RESET;
+		cout.flush();
+		toPrint = "- ";
+		contentStartY += 1;
+		movecursor(contentStartY, contentStartX);
+	}
+	print_status(inventory_literal_x, inventory_literal_y, OGcontentStartY);
 }
+
 
 void print_task_list() {
 	int task_literal_x = COLS * TASK_BORDER_X;
@@ -150,7 +185,7 @@ void print_task_list() {
 	movecursor(contentStartY, contentStartX);
 
 	for (size_t i = 0; i < tasks.size(); i++) {
-			toPrint += tasks.at(i); 
+		toPrint += tasks.at(i); 
 		if(completedTask.at(i) == 0) cout << WHITE << toPrint << RESET;
 		else if(completedTask.at(i) == 2) cout << GREEN << toPrint << RESET;
 		else cout << RED << toPrint << RESET;
@@ -226,20 +261,24 @@ void print_world(size_t player_row, size_t player_col) {
 }
 
 void addInventoryItem(string inv) {
-	if (inv == "ranch") {
-		inventory.push_back("ranch");
-	} else if (inv == "bbq") {
-		inventory.push_back("bbq");
-	}
+	inventory.push_back(inv);
 
 	return;
 }
 
 
-
+void Intro() {
+	show_cursor(false);
+	clearscreen();
+	dialog("Welcome to Dad Bod");
+	usleep(3'000'000);
+	return;
+}
 
 int main() {
 	if (screenSizeBad()) tooSmall();
+
+	Intro();
 
 	print_screen();
 	const int MAP_ROW = world_map.size();
@@ -251,6 +290,19 @@ int main() {
 	show_cursor(false);
 	while (true) {
 		int c = toupper(quick_read());
+		if (completedTask.at(0) == 2 and completedTask.at(1) == 2 and completedTask.at(2) == 2 and completedTask.at(3) == 2 and completedTask.at(4) == 2) {
+			//Add combat this is filler
+			clearscreen();
+			dialog("You win! Congratulations!");
+			usleep(2'000'000);
+			break;
+		}
+		if (tasksLost >= LOSE_CONDITION) {
+			clearscreen();
+			dialog("Sorry, but I guess you just are not Dad Bod enough. Better luck next time!");
+			usleep(2'500'000);
+			break;
+		}
 		if (c == 'Q') break;
 		if (c == 'W' or c == UP_ARROW) current_row--;
 		if (c == 'S' or c == DOWN_ARROW) current_row++;
@@ -336,12 +388,14 @@ void raw_mode_on(int taskNum, int row, int col){
 	print_screen();
 }
 
-void checkLocation(auto row, auto col) {//FIXME add other task (NEED 3 more)
+void checkLocation(auto row, auto col) {
 	char currLoc = world_map.at(row).at(col);
 	if (currLoc == '%') {
 		completedTask.at(0);
 		raw_mode_off();	
 		completedTask.at(0) = ikeaBook();
+		if (completedTask.at(0) == 1) tasksLost++;
+		else if (completedTask.at(0) == 2) addInventoryItem("This is item 1.");
 		raw_mode_on(0, row, col);
 		return;
 	}
@@ -349,6 +403,8 @@ void checkLocation(auto row, auto col) {//FIXME add other task (NEED 3 more)
 		completedTask.at(1);
 		raw_mode_off();	
 		completedTask.at(1) = toiletClog();
+		if (completedTask.at(1) == 1) tasksLost++;
+		else if (completedTask.at(1) == 2) addInventoryItem("This is item 2.");
 		raw_mode_on(1, row, col);
 		return;
 	}
@@ -356,6 +412,8 @@ void checkLocation(auto row, auto col) {//FIXME add other task (NEED 3 more)
 		completedTask.at(2);
 		raw_mode_off();	
 		completedTask.at(2) = mowLawn();
+		if (completedTask.at(2) == 1) tasksLost++;
+		else if (completedTask.at(2) == 2) addInventoryItem("This is item 3.");
 		raw_mode_on(2, row, col);
 		return;
 	}
@@ -363,6 +421,8 @@ void checkLocation(auto row, auto col) {//FIXME add other task (NEED 3 more)
 		completedTask.at(3);
 		raw_mode_off();	
 		completedTask.at(3) = hornetNest();
+		if (completedTask.at(3) == 1) tasksLost++;
+		else if (completedTask.at(3) == 2) addInventoryItem("This is item 4.");
 		raw_mode_on(3, row, col);
 		return;
 	}
@@ -370,6 +430,8 @@ void checkLocation(auto row, auto col) {//FIXME add other task (NEED 3 more)
 		completedTask.at(4);
 		raw_mode_off();	
 		completedTask.at(4) = bbq();
+		if (completedTask.at(4) == 1) tasksLost++;
+		else if (completedTask.at(4) == 2) addInventoryItem("This is item 5.");
 		raw_mode_on(4, row, col);
 		return;
 	}
