@@ -30,39 +30,12 @@ int attack(int enemyHealth){
 }
 
 int main(){
-/*
-	char enableCombat;
-	int enemyHealth = 10;
 
-	cout << "Would you like to start combat: y or n\n";
-	cin >> enableCombat;
+int dadHealth = 100;
+int wifeHealth = 100;
 
-	if (enableCombat == 'y'){
-	
-		while (enemyHealth > 0){
-
-			cout << attack(enemyHealth) << endl;
-			enemyHealth = attack(enemyHealth);
-
-			if (enemyHealth <= 0){
-
-				exit(1);
-
-			}
-
-		}
-
-	}
-
-	else{
-
-		exit(1);
-
-	}
-*/
-
-round1();
-round2();
-round3();
+round1(dadHealth, wifeHealth);
+round2(dadHealth, wifeHealth);
+round3(dadHealth, wifeHealth);
 
 }

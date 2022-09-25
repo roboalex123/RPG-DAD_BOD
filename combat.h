@@ -13,9 +13,8 @@ auto [rows,cols] = get_terminal_size();
 
 int centerX(string output){
 	return(cols - output.size())/2; 
-
 }
-void round1(){
+int round1(int& dadh, int& wifeh){
 	clearscreen();
 	int yStart = rows / 2;
 	int chances = 3;
@@ -30,13 +29,16 @@ void round1(){
 	usleep(2'500'000);
 	
 	while(true){//question 1
-		if (chances <= 0){
-			show_cursor(true);
-	//		return 1;
-		}
 
 		int inner_yStart = yStart;
 		clearscreen();
+
+		if (dadh <= 0){
+			output = "Fail";
+			movecursor(++inner_yStart,centerX(output));
+			cout << output << endl;
+			exit(1);
+		}
 
 		output = "What the hell did you do to that book case!?";
 		movecursor(++inner_yStart,centerX(output));
@@ -62,6 +64,10 @@ void round1(){
 			output =  "SUPER EFFECTIVE";
 			movecursor(++inner_yStart,centerX(output));
 			cout << output << endl;
+
+			wifeh -= 33;
+			return wifeh;
+
 			usleep(2'000'000);
 			break;
 		}
@@ -70,7 +76,8 @@ void round1(){
 			movecursor(++inner_yStart,centerX(output));
 			cout << output << endl;
 			usleep(2'000'000);
-			chances--;
+			dadh -= 25;
+			return dadh;
 			continue;
 		}
 	}
@@ -80,7 +87,7 @@ void round1(){
 	cout << output << endl;
 	usleep(1'500'000);
 }
-void round2(){
+int round2(int& dadh, int& wifeh){
 	clearscreen();
 	int yStart = rows / 2;
 	int chances = 3;
@@ -95,13 +102,17 @@ void round2(){
 	usleep(2'500'000);
 	
 	while(true){//question 1
-		if (chances <= 0){
-			show_cursor(true);
-	//		return 1;
-		}
 
 		int inner_yStart = yStart;
 		clearscreen();
+
+	if (dadh <= 0){
+			output = "Fail";
+			movecursor(++inner_yStart,centerX(output));
+			cout << output << endl;
+			exit(1);
+		}
+
 
 		output = "What the hell did you do to that book case!?";
 		movecursor(++inner_yStart,centerX(output));
@@ -127,6 +138,8 @@ void round2(){
 			output =  "SUPER EFFECTIVE";
 			movecursor(++inner_yStart,centerX(output));
 			cout << output << endl;
+			wifeh -= 33;
+			return wifeh;
 			usleep(2'000'000);
 			break;
 		}
@@ -135,7 +148,8 @@ void round2(){
 			movecursor(++inner_yStart,centerX(output));
 			cout << output << endl;
 			usleep(2'000'000);
-			chances--;
+			dadh -= 25;
+			return dadh;
 			continue;
 		}
 	}
@@ -145,7 +159,7 @@ void round2(){
 	cout << output << endl;
 	usleep(1'500'000);
 }
-void round3(){
+int round3(int& dadh, int& wifeh){
 	clearscreen();
 	int yStart = rows / 2;
 	int chances = 3;
@@ -159,14 +173,17 @@ void round3(){
 	//char x = read<char>();
 	usleep(2'500'000);
 	
-	while(true){//question 1
-		if (chances <= 0){
-			show_cursor(true);
-	//		return 1;
-		}
+	while(true){//question 1	
 
 		int inner_yStart = yStart;
 		clearscreen();
+
+	if (dadh <= 0){
+			output = "Fail";
+			movecursor(++inner_yStart,centerX(output));
+			cout << output << endl;
+			exit(1);
+		}
 
 		output = "What the hell did you do to that book case!?";
 		movecursor(++inner_yStart,centerX(output));
@@ -192,6 +209,8 @@ void round3(){
 			output =  "SUPER EFFECTIVE";
 			movecursor(++inner_yStart,centerX(output));
 			cout << output << endl;
+			wifeh -= 34;
+			return wifeh;
 			usleep(2'000'000);
 			break;
 		}
@@ -200,7 +219,8 @@ void round3(){
 			movecursor(++inner_yStart,centerX(output));
 			cout << output << endl;
 			usleep(2'000'000);
-			chances--;
+			dadh -= 25;
+			return dadh;
 			continue;
 		}
 	}
