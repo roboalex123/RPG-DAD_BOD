@@ -110,7 +110,9 @@ int ikeaBook(){
 
 		output = "Enter choice number: ";
 		movecursor(++inner_yStart,centerX(output));
+			show_cursor(true);
 		int choice = read<int>(output);
+			show_cursor(false);
 
 		if (choice == 1){
 			output =  "Now that's thinking like a Dad Bod.";
@@ -160,7 +162,9 @@ int ikeaBook(){
 
 		output = "Enter choice number: ";
 		movecursor(++inner_yStart,centerX(output));
+			show_cursor(true);
 		int choice = read<int>(output);
+			show_cursor(false);
 
 		if (choice == 2){
 			output =  "Now that's thinking like a Dad Bod.";
@@ -208,7 +212,9 @@ int ikeaBook(){
 
 		output = "Enter choice number: ";
 		movecursor(++inner_yStart,centerX(output));
+			show_cursor(true);
 		int choice = read<int>(output);
+			show_cursor(false);
 
 		if (choice == 3){
 			output =  "Now that's thinking like a Dad Bod.";
@@ -280,7 +286,9 @@ int toiletClog(){//task 2
 
 		output = "Enter choice number: ";
 		movecursor(++inner_yStart,centerX(output));
+		show_cursor(true);
 		int choice = read<int>(output);
+		show_cursor(false);
 
 		if (choice == 1){
 			output =  "Now that's thinking like a Dad Bod.";
@@ -330,7 +338,9 @@ int toiletClog(){//task 2
 
 		output = "Enter choice number: ";
 		movecursor(++inner_yStart,centerX(output));
+		show_cursor(true);
 		int choice = read<int>(output);
+		show_cursor(false);
 
 		if (choice == 3){
 			output =  "Now that's thinking like a Dad Bod.";
@@ -378,7 +388,9 @@ int toiletClog(){//task 2
 
 		output = "Enter choice number: ";
 		movecursor(++inner_yStart,centerX(output));
+		show_cursor(true);
 		int choice = read<int>(output);
+		show_cursor(false);
 
 		if (choice == 3){
 			output =  "Now that's thinking like a Dad Bod.";
@@ -450,7 +462,9 @@ int mowLawn(){//task 3
 
 		output = "Enter choice number: ";
 		movecursor(++inner_yStart,centerX(output));
+		show_cursor(true);
 		int choice = read<int>(output);
+		show_cursor(false);
 
 		if (choice == 1){
 			output =  "Now that's thinking like a Dad Bod.";
@@ -500,7 +514,9 @@ int mowLawn(){//task 3
 
 		output = "Enter choice number: ";
 		movecursor(++inner_yStart,centerX(output));
+		show_cursor(true);
 		int choice = read<int>(output);
+		show_cursor(false);
 
 		if (choice == 2){
 			output =  "Now that's thinking like a Dad Bod.";
@@ -548,7 +564,9 @@ int mowLawn(){//task 3
 
 		output = "Enter choice number: ";
 		movecursor(++inner_yStart,centerX(output));
+		show_cursor(true);
 		int choice = read<int>(output);
+		show_cursor(false);
 
 		if (choice == 1){
 			output =  "Now that's thinking like a Dad Bod.";
@@ -621,7 +639,9 @@ int hornetNest(){//task 4
 
 		output = "Enter choice number: ";
 		movecursor(++inner_yStart,centerX(output));
+		show_cursor(true);
 		int choice = read<int>(output);
+		show_cursor(false);
 
 		if (choice == 1){
 			output =  "Now that's thinking like a Dad Bod.";
@@ -671,7 +691,9 @@ int hornetNest(){//task 4
 
 		output = "Enter choice number: ";
 		movecursor(++inner_yStart,centerX(output));
+		show_cursor(true);
 		int choice = read<int>(output);
+		show_cursor(false);
 
 		if (choice == 2){
 			output =  "Now that's thinking like a Dad Bod.";
@@ -719,7 +741,9 @@ int hornetNest(){//task 4
 
 		output = "Enter choice number: ";
 		movecursor(++inner_yStart,centerX(output));
+		show_cursor(true);
 		int choice = read<int>(output);
+		show_cursor(false);
 
 		if (choice == 1){
 			output =  "Now that's thinking like a Dad Bod.";
@@ -791,7 +815,9 @@ int bbq(){//task 5
 
 		output = "Enter choice number: ";
 		movecursor(++inner_yStart,centerX(output));
+		show_cursor(true);
 		int choice = read<int>(output);
+		show_cursor(false);
 
 		if (choice == 1){
 			output =  "Now that's thinking like a Dad Bod.";
@@ -841,7 +867,9 @@ int bbq(){//task 5
 
 		output = "Enter choice number: ";
 		movecursor(++inner_yStart,centerX(output));
+		show_cursor(true);
 		int choice = read<int>(output);
+		show_cursor(false);
 
 		if (choice == 3){
 			output =  "Now that's thinking like a Dad Bod.";
@@ -889,7 +917,9 @@ int bbq(){//task 5
 
 		output = "Enter choice number: ";
 		movecursor(++inner_yStart,centerX(output));
+		show_cursor(true);
 		int choice = read<int>(output);
+		show_cursor(false);
 
 		if (choice == 3){
 			output =  "Now that's thinking like a Dad Bod.";
