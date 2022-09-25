@@ -3,6 +3,7 @@
 #include <ctime>
 #include "/public/read.h"
 #include "/public/colors.h"
+#include "combat.h"
 using namespace std;
 
 int attack(int enemyHealth){
@@ -29,7 +30,7 @@ int attack(int enemyHealth){
 }
 
 int main(){
-
+/*
 	char enableCombat;
 	int enemyHealth = 10;
 
@@ -58,5 +59,10 @@ int main(){
 		exit(1);
 
 	}
+*/
+
+round1();
+round2();
+round3();
 
 }
