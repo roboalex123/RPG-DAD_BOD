@@ -35,7 +35,5 @@ int dadHealth = 100;
 int wifeHealth = 100;
 
 round1(dadHealth, wifeHealth);
-round2(dadHealth, wifeHealth);
-round3(dadHealth, wifeHealth);
 
 }
