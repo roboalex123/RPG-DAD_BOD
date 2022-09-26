@@ -9,12 +9,11 @@ Here are the Criteria that we followed.
 3. Must have colors (use provided `colors.h` will include at a later date)
 4. Must have **5** puzzles to win the game
 5. **40** lines of dialogue and/or descriptions of the world
----
 ### Extra Credit
----
-1. Nonblocking I/O (also in colors.h)
+1. Nonblocking I/O (also in 'colors.h')
 2. Compose Original Music and Cover Art [Link to ours](https://youtu.be/tX7EOyNQvKY)
 3. Inventory System
+
 We were able to accomplish all of the above!
 ---
 
