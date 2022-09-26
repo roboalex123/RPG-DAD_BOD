@@ -1,13 +1,7 @@
 #include <cmath>
 #include <cctype>
-#include "task.h"
 #include <ctime>
 using namespace std;
-
-// NOTE: This is just a skeleton of what this might look like 
-//       Please change anything that could be made better or
-//       that's need to make it work in main
-
 
 int dadh = 100, wifeh  = 100l;
 int gameRand = 0;
@@ -20,7 +14,7 @@ int bigBuff = 6;
 int maxDamage = 40;
 string output;
 
-int round1(int& dadh, int& wifeh){
+int round1(){
 	srand(time(0));
 	clearscreen();
 	int yStart = rows / 2;
@@ -59,7 +53,9 @@ int round1(int& dadh, int& wifeh){
 
 		output = "Enter choice number: ";
 		movecursor(++inner_yStart,centerX(output));
+		show_cursor(true);
 		int choice = read<int>(output);
+		show_cursor(false);
 		if (choice < 1 or choice > 3){
 			output ="Please enter a valid choice!";
 			movecursor(++inner_yStart,centerX(output));
@@ -95,7 +91,7 @@ int round1(int& dadh, int& wifeh){
 				wifeh -= baseDamage + lowBuff + (rand() % maxDamage - (baseDamage + lowBuff) + 1);
 			}
 			usleep(2'000'000);
-			return wifeh;
+			return 2;
 
 		}
 		else{
@@ -124,11 +120,11 @@ int round1(int& dadh, int& wifeh){
 			}
 			usleep(2'000'000);
 
-			return dadh;
+			return 2;
 		}
 	}
 }
-int round2(int& dadh, int& wifeh){
+int round2(){
 	srand(time(0));
 	clearscreen();
 	int yStart = rows / 2;
@@ -194,7 +190,7 @@ int round2(int& dadh, int& wifeh){
 				wifeh -= baseDamage + lowBuff + (rand() % maxDamage - (baseDamage + lowBuff) + 1);
 			}
 			usleep(2'000'000);
-			return wifeh;
+			return 2;
 
 		}
 		else{
@@ -223,11 +219,11 @@ int round2(int& dadh, int& wifeh){
 			}
 			usleep(2'000'000);
 
-			return dadh;
+			return 2;
 		}
 	}
 }
-int round3(int& dadh, int& wifeh){
+int round3(){
 	srand(time(0));
 	clearscreen();
 	int yStart = rows / 2;
@@ -295,7 +291,7 @@ int round3(int& dadh, int& wifeh){
 			usleep(2'000'000);
 			if (wifeh <= 0) return 1;
 			if (dadh <= 0) return 0;
-			return wifeh;
+			return 2;
 
 		}
 		else{
@@ -326,12 +322,12 @@ int round3(int& dadh, int& wifeh){
 
 			if (wifeh <= 0) return 1;
 			if (dadh <= 0) return 0;
-			return dadh;
+			return 2;
 		}
 	}
 }
 
-int finalRound(int& wifeh, int& dadh){
+int finalRound(){
 	clearscreen();
 	int yStart = rows / 2;
 	int inner_yStart = yStart;

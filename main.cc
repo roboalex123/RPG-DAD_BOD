@@ -5,6 +5,7 @@
 
 /* Includes */
 #include "task.h"
+#include "combat.h"
 #include <vector>
 using namespace std;
 
@@ -18,6 +19,7 @@ const double INVENTORY_BORDER_X = 1.00;
 const double INVENTORY_BORDER_Y = 1.00 - MAP_BORDER_Y;
 const int LOSE_CONDITION = 3;
 int tasksLost = 0;
+int combatRetval = 0;
 
 /* Declare Map */
 vector<string> world_map = {
@@ -306,6 +308,17 @@ void Intro() {
 	return;
 }
 
+void youWon() {
+	clearscreen();
+	dialog("You sir, are the ULTIMATE DAD BOD. Grab a Busch Light and take the night off!");
+	usleep(7'000'000);
+}
+void youLose() {
+	clearscreen();
+	dialog("Sorry, but I guess you just are not Dad Bod enough. Better luck next time!");
+	usleep(7'000'000);
+}
+
 int main() {
 	if (screenSizeBad()) tooSmall();
 
@@ -322,16 +335,45 @@ int main() {
 	while (true) {
 		int c = toupper(quick_read());
 		if (completedTask.at(0) == 2 and completedTask.at(1) == 2 and completedTask.at(2) == 2 and completedTask.at(3) == 2 and completedTask.at(4) == 2) {
-			//Add combat this is filler
-			clearscreen();
-			dialog("You win! Congratulations!");
-			usleep(2'000'000);
+			combatRetval = round1();
+			if (combatRetval == 1) {
+				youWon();
+				break;
+			} else if (combatRetval == 0) {
+				youLose();
+				break;
+			}
+
+			combatRetval = round2();
+			if (combatRetval == 1) {
+				youWon();
+				break;
+			} else if (combatRetval == 0) {
+				youLose();
+				break;
+			}
+			combatRetval = round3();
+			if (combatRetval == 1) {
+				youWon();
+				break;
+			} else if (combatRetval == 0) {
+				youLose();
+				break;
+			}
+			combatRetval = finalRound();
+			if (combatRetval == 1) {
+				youWon();
+				break;
+			} else if (combatRetval == 0) {
+				youLose();
+				break;
+			}
+
+
 			break;
 		}
 		if (tasksLost >= LOSE_CONDITION) {
-			clearscreen();
-			dialog("Sorry, but I guess you just are not Dad Bod enough. Better luck next time!");
-			usleep(2'500'000);
+			youLose();
 			break;
 		}
 		if (c == 'Q') break;
