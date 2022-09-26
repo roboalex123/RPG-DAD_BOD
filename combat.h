@@ -154,7 +154,9 @@ int round2(){
 
 		output = "Enter choice number: ";
 		movecursor(++inner_yStart,centerX(output));
+		show_cursor(true);
 		int choice = read<int>(output);
+		show_cursor(false);
 		if (choice < 1 or choice > 3){
 			output ="Please enter a valid choice!";
 			movecursor(++inner_yStart,centerX(output));
@@ -253,7 +255,9 @@ int round3(){
 
 		output = "Enter choice number: ";
 		movecursor(++inner_yStart,centerX(output));
+		show_cursor(true);
 		int choice = read<int>(output);
+		show_cursor(false);
 		if (choice < 1 or choice > 3){
 			output ="Please enter a valid choice!";
 			movecursor(++inner_yStart,centerX(output));
@@ -343,7 +347,9 @@ int finalRound(){
 
 		output = "Enter a number between 1-100 for the final battle: ";
 		movecursor(++inner_yStart,centerX(output));
+		show_cursor(true);
 		int choice = read<int>(output);
+		show_cursor(false);
 
 		if (choice < 1 or choice > 100){
 			output ="Please enter a valid choice!";
