@@ -9,63 +9,6 @@ int centerX(string output){
 
 }
 
-int narratorStart(){
-	clearscreen();
-	int yStart = rows / 2;
-	show_cursor(false);
-	string output = "Suddenly, you awaken to the sound of the front door slamming shut. You quickly realize you passed out drunk on the couch again...";
-	movecursor(yStart,centerX(output));
-	cout << output; 
-	cout.flush(); 
-	usleep(5'000'000);
-
-	clearscreen();
-	output = "You think to yourself, \"I've really got to quit drinking so much at Timmy's T-ball games. Then again, who else is going to yell at the ref...\""; 
-	movecursor(yStart,centerX(output));
-	cout << output;
-	cout.flush();
-	usleep(6'000'000);
-
-	clearscreen();
-	output = "You sit up, still wearing yesterday's apparel.";
-	movecursor(yStart,centerX(output));
-	cout << output;
-	cout.flush();
-	usleep(5'000'000);
-
-	clearscreen();
-    output = "White New Balance shoes with grass stains, long white socks, faded knee brace, cargo shorts containing the random tools and at least four dollars in spare change";
-    movecursor(yStart,centerX(output));
-    cout << output;
-    cout.flush();
-    usleep(7'000'000);
-
-	clearscreen();
-    output = "Your favorite Dale Earnhardt T-shirt with the sleeves cut off, and of course your lucky Busch Light hat.";
-    movecursor(yStart,centerX(output));
-    cout << output;
-    cout.flush();
-    usleep(7'000'000);
-
-
-
-	clearscreen();
-	output = "You stumble to the kitchen and see a note from the wife that says...";
-	movecursor(yStart,centerX(output));
-	cout << output;
-	cout.flush();
-	usleep(5'000'000);
-
-	clearscreen();
-    output = "\"I have taken Timmy and the credit card to go shopping. Finish the honey-do-list before I return. Love Karen\"";
-    movecursor(yStart,centerX(output));
-    cout << output;
-    cout.flush();
-    usleep(5'000'000);
-
-	return 2;
-}
-
 int ikeaBook(){
 	clearscreen();
 	int yStart = rows / 2;
