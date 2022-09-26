@@ -1,9 +1,6 @@
 #include <cmath>
 #include <cctype>
 #include "task.h"
-#include "time.h"
-#include <stdio.h>
-#include <stdlib.h>
 #include <ctime>
 using namespace std;
 
@@ -11,9 +8,9 @@ using namespace std;
 //       Please change anything that could be made better or
 //       that's need to make it work in main
 
- 
+
 int dadh = 100, wifeh  = 100l;
-int goalRand = 0;
+int gameRand = 0;
 int dadRand = 0;
 int wifeRand = 0;
 int baseDamage = 10;
@@ -21,9 +18,10 @@ int lowBuff = -3;
 int medBuff = 3;
 int bigBuff = 6;
 int maxDamage = 40;
+string output;
 
 int round1(int& dadh, int& wifeh){
-srand(time(0));
+	srand(time(0));
 	clearscreen();
 	int yStart = rows / 2;
 
@@ -42,11 +40,6 @@ srand(time(0));
 		int inner_yStart = yStart;
 		clearscreen();
 
-		if (dadh <= 0){
-			output = "Fail";
-			movecursor(++inner_yStart,centerX(output));
-			cout << output << endl;
-		}
 
 		output = "What the hell did you do to that book case!?";
 		movecursor(++inner_yStart,centerX(output));
@@ -73,69 +66,313 @@ srand(time(0));
 			cout << output << endl; 
 			continue;
 		}
-		
+
 		dadRand  = (rand() % 100) + 1;
 		wifeRand = (rand() % 100) + 1;
 
 		if (dadRand >= wifeRand){
 			if (choice == 1){
-			output =  "SUPER EFFECTIVE TO WIFE";
-			movecursor(++inner_yStart,centerX(output));
-			cout << output << endl;
+				output =  "SUPER EFFECTIVE TO WIFE";
+				movecursor(++inner_yStart,centerX(output));
+				cout << output << endl;
 
-			wifeh -= baseDamage + bigBuff + (rand() % maxDamage - (baseDamage + bigBuff) + 1);
+				wifeh -= baseDamage + bigBuff + (rand() % maxDamage - (baseDamage + bigBuff) + 1);
 			}
-			
-			if (choice == 3){
-			output =  "EFFECTIVE TO WIFE";
-			movecursor(++inner_yStart,centerX(output));
-			cout << output << endl;
 
-			wifeh -= baseDamage + medBuff + (rand() % maxDamage - (baseDamage + medBuff) + 1);
+			if (choice == 3){
+				output =  "EFFECTIVE TO WIFE";
+				movecursor(++inner_yStart,centerX(output));
+				cout << output << endl;
+
+				wifeh -= baseDamage + medBuff + (rand() % maxDamage - (baseDamage + medBuff) + 1);
 			}
 
 			if (choice == 2){
-			output =  "NOT VERY EFFECTIVE TO WIFE";
-			movecursor(++inner_yStart,centerX(output));
-			cout << output << endl;
+				output =  "NOT VERY EFFECTIVE TO WIFE";
+				movecursor(++inner_yStart,centerX(output));
+				cout << output << endl;
 
-			wifeh -= baseDamage + lowBuff + (rand() % maxDamage - (baseDamage + lowBuff) + 1);
+				wifeh -= baseDamage + lowBuff + (rand() % maxDamage - (baseDamage + lowBuff) + 1);
 			}
 			usleep(2'000'000);
 			return wifeh;
 
-			break;
 		}
 		else{
 			if (choice == 1){
-			output =  "NOT VERY EFFECTIVE TO DAD BOD";
-			movecursor(++inner_yStart,centerX(output));
-			cout << output << endl;
+				output =  "NOT VERY EFFECTIVE TO DAD BOD";
+				movecursor(++inner_yStart,centerX(output));
+				cout << output << endl;
 
-			dadh -= baseDamage + lowBuff + (rand() % maxDamage - (baseDamage + lowBuff) + 1);
+				dadh -= baseDamage + lowBuff + (rand() % maxDamage - (baseDamage + lowBuff) + 1);
 			}
-			
-			if (choice == 3){
-			output =  "EFFECTIVE TO DAD BOD";
-			movecursor(++inner_yStart,centerX(output));
-			cout << output << endl;
 
-			dadh -= baseDamage + medBuff + (rand() % maxDamage - (baseDamage + medBuff) + 1);
+			if (choice == 3){
+				output =  "EFFECTIVE TO DAD BOD";
+				movecursor(++inner_yStart,centerX(output));
+				cout << output << endl;
+
+				dadh -= baseDamage + medBuff + (rand() % maxDamage - (baseDamage + medBuff) + 1);
 			}
 
 			if (choice == 2){
-			output =  "SUPER EFFECTIVE DAD BOD";
-			movecursor(++inner_yStart,centerX(output));
-			cout << output << endl;
+				output =  "SUPER EFFECTIVE DAD BOD";
+				movecursor(++inner_yStart,centerX(output));
+				cout << output << endl;
 
-			dadh -= baseDamage + bigBuff + (rand() % maxDamage - (baseDamage + bigBuff) + 1);
+				dadh -= baseDamage + bigBuff + (rand() % maxDamage - (baseDamage + bigBuff) + 1);
 			}
 			usleep(2'000'000);
-			
+
 			return dadh;
-			break;
 		}
 	}
+}
+int round2(int& dadh, int& wifeh){
+	srand(time(0));
+	clearscreen();
+	int yStart = rows / 2;
+
+
+	while(true){//question 1
+
+		int inner_yStart = yStart;
+		clearscreen();
+
+
+		output = "Why is there water all over this bathroom!?";
+		movecursor(++inner_yStart,centerX(output));
+		cout << output << endl;
+
+		output = "1. [Tampon] Why are you the one clogging the toilet?";
+		movecursor(++inner_yStart,centerX(output));
+		cout << output << endl;
+
+		output = "2. [Lie] It was fine earlier!";
+		movecursor(++inner_yStart,centerX(output));
+		cout << output << endl;
+
+		output = "3.[Honest] It's only a little bit.";
+		movecursor(++inner_yStart,centerX(output));
+		cout << output << endl;
+
+		output = "Enter choice number: ";
+		movecursor(++inner_yStart,centerX(output));
+		int choice = read<int>(output);
+		if (choice < 1 or choice > 3){
+			output ="Please enter a valid choice!";
+			movecursor(++inner_yStart,centerX(output));
+			cout << output << endl; 
+			continue;
+		}
+
+		dadRand  = (rand() % 100) + 1;
+		wifeRand = (rand() % 100) + 1;
+
+		if (dadRand >= wifeRand){
+			if (choice == 1){
+				output =  "SUPER EFFECTIVE TO WIFE";
+				movecursor(++inner_yStart,centerX(output));
+				cout << output << endl;
+
+				wifeh -= baseDamage + bigBuff + (rand() % maxDamage - (baseDamage + bigBuff) + 1);
+			}
+
+			if (choice == 3){
+				output =  "EFFECTIVE TO WIFE";
+				movecursor(++inner_yStart,centerX(output));
+				cout << output << endl;
+
+				wifeh -= baseDamage + medBuff + (rand() % maxDamage - (baseDamage + medBuff) + 1);
+			}
+
+			if (choice == 2){
+				output =  "NOT VERY EFFECTIVE TO WIFE";
+				movecursor(++inner_yStart,centerX(output));
+				cout << output << endl;
+
+				wifeh -= baseDamage + lowBuff + (rand() % maxDamage - (baseDamage + lowBuff) + 1);
+			}
+			usleep(2'000'000);
+			return wifeh;
+
+		}
+		else{
+			if (choice == 1){
+				output =  "NOT VERY EFFECTIVE TO DAD BOD";
+				movecursor(++inner_yStart,centerX(output));
+				cout << output << endl;
+
+				dadh -= baseDamage + lowBuff + (rand() % maxDamage - (baseDamage + lowBuff) + 1);
+			}
+
+			if (choice == 3){
+				output =  "EFFECTIVE TO DAD BOD";
+				movecursor(++inner_yStart,centerX(output));
+				cout << output << endl;
+
+				dadh -= baseDamage + medBuff + (rand() % maxDamage - (baseDamage + medBuff) + 1);
+			}
+
+			if (choice == 2){
+				output =  "SUPER EFFECTIVE DAD BOD";
+				movecursor(++inner_yStart,centerX(output));
+				cout << output << endl;
+
+				dadh -= baseDamage + bigBuff + (rand() % maxDamage - (baseDamage + bigBuff) + 1);
+			}
+			usleep(2'000'000);
+
+			return dadh;
+		}
+	}
+}
+int round3(int& dadh, int& wifeh){
+	srand(time(0));
+	clearscreen();
+	int yStart = rows / 2;
+
+
+	while(true){//question 1
+
+		int inner_yStart = yStart;
+		clearscreen();
+
+
+		output = "These burgers are really good! Are you really the one who cook them!?";
+		movecursor(++inner_yStart,centerX(output));
+		cout << output << endl;
+
+		output = "1. [Frozen Patties] Well I would have if you had thawed these out!";
+		movecursor(++inner_yStart,centerX(output));
+		cout << output << endl;
+
+		output = "2. [Lie] Of course I did!";
+		movecursor(++inner_yStart,centerX(output));
+		cout << output << endl;
+
+		output = "3.[Honest] No, they are from Hooters.";
+		movecursor(++inner_yStart,centerX(output));
+		cout << output << endl;
+
+		output = "Enter choice number: ";
+		movecursor(++inner_yStart,centerX(output));
+		int choice = read<int>(output);
+		if (choice < 1 or choice > 3){
+			output ="Please enter a valid choice!";
+			movecursor(++inner_yStart,centerX(output));
+			cout << output << endl; 
+			continue;
+		}
+
+		dadRand  = (rand() % 100) + 1;
+		wifeRand = (rand() % 100) + 1;
+
+		if (dadRand >= wifeRand){
+			if (choice == 1){
+				output =  "SUPER EFFECTIVE TO WIFE";
+				movecursor(++inner_yStart,centerX(output));
+				cout << output << endl;
+
+				wifeh -= baseDamage + bigBuff + (rand() % maxDamage - (baseDamage + bigBuff) + 1);
+			}
+
+			if (choice == 3){
+				output =  "EFFECTIVE TO WIFE";
+				movecursor(++inner_yStart,centerX(output));
+				cout << output << endl;
+
+				wifeh -= baseDamage + medBuff + (rand() % maxDamage - (baseDamage + medBuff) + 1);
+			}
+
+			if (choice == 2){
+				output =  "NOT VERY EFFECTIVE TO WIFE";
+				movecursor(++inner_yStart,centerX(output));
+				cout << output << endl;
+
+				wifeh -= baseDamage + lowBuff + (rand() % maxDamage - (baseDamage + lowBuff) + 1);
+			}
+			usleep(2'000'000);
+			if (wifeh <= 0) return 1;
+			if (dadh <= 0) return 0;
+			return wifeh;
+
+		}
+		else{
+			if (choice == 1){
+				output =  "NOT VERY EFFECTIVE TO DAD BOD";
+				movecursor(++inner_yStart,centerX(output));
+				cout << output << endl;
+
+				dadh -= baseDamage + lowBuff + (rand() % maxDamage - (baseDamage + lowBuff) + 1);
+			}
+
+			if (choice == 3){
+				output =  "EFFECTIVE TO DAD BOD";
+				movecursor(++inner_yStart,centerX(output));
+				cout << output << endl;
+
+				dadh -= baseDamage + medBuff + (rand() % maxDamage - (baseDamage + medBuff) + 1);
+			}
+
+			if (choice == 2){
+				output =  "SUPER EFFECTIVE DAD BOD";
+				movecursor(++inner_yStart,centerX(output));
+				cout << output << endl;
+
+				dadh -= baseDamage + bigBuff + (rand() % maxDamage - (baseDamage + bigBuff) + 1);
+			}
+			usleep(2'000'000);
+
+			if (wifeh <= 0) return 1;
+			if (dadh <= 0) return 0;
+			return dadh;
+		}
+	}
+}
+
+int finalRound(int& wifeh, int& dadh){
+	clearscreen();
+	int yStart = rows / 2;
+	int inner_yStart = yStart;
+
+	gameRand = (rand() % 100) + 1;
+	wifeRand = (rand() % 100) + 1;
+
+	while(true){
+		clearscreen();
+		output = "Oh wow, you are the first Dad bod to make it this far.";
+		movecursor(inner_yStart,centerX(output));
+		cout << output << endl;
+
+		output = "Enter a number between 1-100 for the final battle: ";
+		movecursor(++inner_yStart,centerX(output));
+		int choice = read<int>(output);
+
+		if (choice < 1 or choice > 100){
+			output ="Please enter a valid choice!";
+			movecursor(++inner_yStart,centerX(output));
+			cout << output << endl;
+			usleep(3'000'000);
+			continue;
+		}
+		if (abs(gameRand - wifeRand) >= abs(gameRand - choice)){
+			clearscreen();
+			output = "Dad Bod says: \"You are acting just like your mother\" (FATALITY)";
+			movecursor(++inner_yStart,centerX(output));
+			cout << output << endl;
+			return 1;
+		}
+
+		else{
+			clearscreen();
+			output = "Wife says: \"You peaked in highschool.\" (FATALITY)";
+			movecursor(++inner_yStart,centerX(output));
+			cout << output << endl;
+			return 0;
+		}
+	}
+
 }
 //you are acting just like your mother (Walks away)
 // You peaked in high school (Walks away)
