@@ -427,7 +427,7 @@ void checkLocation(auto row, auto col) {
 		raw_mode_off();	
 		completedTask.at(0) = ikeaBook();
 		if (completedTask.at(0) == 1) tasksLost++;
-		else if (completedTask.at(0) == 2) addInventoryItem("This is item 1.");
+		else if (completedTask.at(0) == 2) addInventoryItem("Reciept");
 		raw_mode_on(0, row, col);
 		return;
 	}
@@ -436,7 +436,7 @@ void checkLocation(auto row, auto col) {
 		raw_mode_off();	
 		completedTask.at(1) = toiletClog();
 		if (completedTask.at(1) == 1) tasksLost++;
-		else if (completedTask.at(1) == 2) addInventoryItem("This is item 2.");
+		else if (completedTask.at(1) == 2) addInventoryItem("Tampon");
 		raw_mode_on(1, row, col);
 		return;
 	}
@@ -445,7 +445,6 @@ void checkLocation(auto row, auto col) {
 		raw_mode_off();	
 		completedTask.at(2) = mowLawn();
 		if (completedTask.at(2) == 1) tasksLost++;
-		else if (completedTask.at(2) == 2) addInventoryItem("This is item 3.");
 		raw_mode_on(2, row, col);
 		return;
 	}
@@ -454,7 +453,6 @@ void checkLocation(auto row, auto col) {
 		raw_mode_off();	
 		completedTask.at(3) = hornetNest();
 		if (completedTask.at(3) == 1) tasksLost++;
-		else if (completedTask.at(3) == 2) addInventoryItem("This is item 4.");
 		raw_mode_on(3, row, col);
 		return;
 	}
@@ -463,7 +461,7 @@ void checkLocation(auto row, auto col) {
 		raw_mode_off();	
 		completedTask.at(4) = bbq();
 		if (completedTask.at(4) == 1) tasksLost++;
-		else if (completedTask.at(4) == 2) addInventoryItem("This is item 5.");
+		else if (completedTask.at(4) == 2) addInventoryItem("Frozen Hamburger Patties");
 		raw_mode_on(4, row, col);
 		return;
 	}
