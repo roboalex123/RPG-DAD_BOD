@@ -14,7 +14,7 @@ Here are the Criteria that we followed.
 2. Compose Original Music and Cover Art [Link to ours](https://youtu.be/tX7EOyNQvKY)
 3. Inventory System
 
-We were able to accomplish all of the above!
+> We were able to accomplish all of the above!
 ---
 
 ## Will add code breakdown at a later date.
