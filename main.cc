@@ -269,9 +269,33 @@ void addInventoryItem(string inv) {
 
 void Intro() {
 	show_cursor(false);
-	clearscreen();
 	dialog("Welcome to Dad Bod");
 	usleep(3'000'000);
+
+	dialog("Suddenly, you awaken to the sound of the front door slamming shut. You quickly realize you passed out drunk on the couch again...");
+	usleep(5'000'000);
+
+	dialog("You think to yourself, \"I\'ve really got to quit drinking so much at Timm\'s T-ball games. Then again, who else is going to yell at the ref...\"");
+	usleep(6'000'000);
+
+	dialog("You sit up, still wearing yesterday\'s apparel.");
+	usleep(5'000'000);
+
+	dialog("White New Balance shoes with grass stains, long white socks, faded knee brace, cargo shorts containing random tools and at least four dollars in spare change.");
+	usleep(7'000'000);
+
+	dialog("You are also wearing your favorite Dale Earnhardt T-shirt with the sleeves cut off, and of course your lucky Busch Light hat.");
+	usleep(7'000'000);
+
+	dialog("You stumble into the kitchen and see a note from the wife that says...");
+	usleep(5'000'000);
+
+	dialog("\"I have taken Timmy and the credit card to go shopping. Finish the honey-do-list before I return.\"");
+	usleep(5'000'000);
+
+	dialog("- Love Karen");
+	usleep(3'000'000);
+
 	return;
 }
 
@@ -326,6 +350,7 @@ int main() {
 }
 
 void dialog(string toPrint) {
+	clearscreen();
 	movecursor(ROWS/2, (COLS - toPrint.size()) /2);
 	system(("echo " + toPrint + " | lolcat").c_str());
 
