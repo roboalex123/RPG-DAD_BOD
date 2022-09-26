@@ -15,6 +15,7 @@ int maxDamage = 40;
 string output;
 
 int round1(){
+	set_raw_mode(false);
 	srand(time(0));
 	clearscreen();
 	int yStart = rows / 2;
@@ -26,7 +27,7 @@ int round1(){
 	cout << output;
 	cout.flush();
 	//char x = read<char>();
-	usleep(2'500'000);
+	usleep(4'500'000);
 
 
 	while(true){//question 1
@@ -55,13 +56,13 @@ int round1(){
 		movecursor(++inner_yStart,centerX(output));
 		show_cursor(true);
 		int choice = read<int>(output);
-		show_cursor(false);
 		if (choice < 1 or choice > 3){
 			output ="Please enter a valid choice!";
 			movecursor(++inner_yStart,centerX(output));
 			cout << output << endl; 
 			continue;
 		}
+		show_cursor(false);
 
 		dadRand  = (rand() % 100) + 1;
 		wifeRand = (rand() % 100) + 1;
@@ -90,7 +91,10 @@ int round1(){
 
 				wifeh -= baseDamage + lowBuff + (rand() % maxDamage - (baseDamage + lowBuff) + 1);
 			}
-			usleep(2'000'000);
+			output = "Dad Bod health: ";
+			movecursor(++inner_yStart,centerX(output));
+			cout << output << dadh << endl;
+			usleep(4'000'000);
 			return 2;
 
 		}
@@ -118,13 +122,17 @@ int round1(){
 
 				dadh -= baseDamage + bigBuff + (rand() % maxDamage - (baseDamage + bigBuff) + 1);
 			}
-			usleep(2'000'000);
+			output = "Wife health: ";
+			movecursor(++inner_yStart,centerX(output));
+			cout << output << wifeh << endl;
+			usleep(4'000'000);
 
 			return 2;
 		}
 	}
 }
 int round2(){
+	set_raw_mode(false);
 	srand(time(0));
 	clearscreen();
 	int yStart = rows / 2;
@@ -156,13 +164,13 @@ int round2(){
 		movecursor(++inner_yStart,centerX(output));
 		show_cursor(true);
 		int choice = read<int>(output);
-		show_cursor(false);
 		if (choice < 1 or choice > 3){
 			output ="Please enter a valid choice!";
 			movecursor(++inner_yStart,centerX(output));
 			cout << output << endl; 
 			continue;
 		}
+		show_cursor(false);
 
 		dadRand  = (rand() % 100) + 1;
 		wifeRand = (rand() % 100) + 1;
@@ -191,7 +199,10 @@ int round2(){
 
 				wifeh -= baseDamage + lowBuff + (rand() % maxDamage - (baseDamage + lowBuff) + 1);
 			}
-			usleep(2'000'000);
+			output = "Wife health: ";
+			movecursor(++inner_yStart,centerX(output));
+			cout << output << wifeh << endl;
+			usleep(4'000'000);
 			return 2;
 
 		}
@@ -219,13 +230,17 @@ int round2(){
 
 				dadh -= baseDamage + bigBuff + (rand() % maxDamage - (baseDamage + bigBuff) + 1);
 			}
-			usleep(2'000'000);
+			output = "Dad Bod health: ";
+			movecursor(++inner_yStart,centerX(output));
+			cout << output << dadh << endl;
+			usleep(4'000'000);
 
 			return 2;
 		}
 	}
 }
 int round3(){
+	set_raw_mode(false);
 	srand(time(0));
 	clearscreen();
 	int yStart = rows / 2;
@@ -257,13 +272,13 @@ int round3(){
 		movecursor(++inner_yStart,centerX(output));
 		show_cursor(true);
 		int choice = read<int>(output);
-		show_cursor(false);
 		if (choice < 1 or choice > 3){
 			output ="Please enter a valid choice!";
 			movecursor(++inner_yStart,centerX(output));
 			cout << output << endl; 
 			continue;
 		}
+		show_cursor(false);
 
 		dadRand  = (rand() % 100) + 1;
 		wifeRand = (rand() % 100) + 1;
@@ -292,7 +307,10 @@ int round3(){
 
 				wifeh -= baseDamage + lowBuff + (rand() % maxDamage - (baseDamage + lowBuff) + 1);
 			}
-			usleep(2'000'000);
+			output = "Wife health: ";
+			movecursor(++inner_yStart,centerX(output));
+			cout << output << wifeh << endl;
+			usleep(4'000'000);
 			if (wifeh <= 0) return 1;
 			if (dadh <= 0) return 0;
 			return 2;
@@ -322,7 +340,10 @@ int round3(){
 
 				dadh -= baseDamage + bigBuff + (rand() % maxDamage - (baseDamage + bigBuff) + 1);
 			}
-			usleep(2'000'000);
+			output = "Dad Bod health: ";
+			movecursor(++inner_yStart,centerX(output));
+			cout << output << dadh << endl;
+			usleep(4'000'000);
 
 			if (wifeh <= 0) return 1;
 			if (dadh <= 0) return 0;
@@ -332,6 +353,7 @@ int round3(){
 }
 
 int finalRound(){
+	set_raw_mode(false);
 	clearscreen();
 	int yStart = rows / 2;
 	int inner_yStart = yStart;
@@ -349,7 +371,6 @@ int finalRound(){
 		movecursor(++inner_yStart,centerX(output));
 		show_cursor(true);
 		int choice = read<int>(output);
-		show_cursor(false);
 
 		if (choice < 1 or choice > 100){
 			output ="Please enter a valid choice!";
@@ -358,11 +379,13 @@ int finalRound(){
 			usleep(3'000'000);
 			continue;
 		}
+		show_cursor(false);
 		if (abs(gameRand - wifeRand) >= abs(gameRand - choice)){
 			clearscreen();
 			output = "Dad Bod says: \"You are acting just like your mother\" (FATALITY)";
 			movecursor(++inner_yStart,centerX(output));
 			cout << output << endl;
+			usleep(5'000'000);
 			return 1;
 		}
 
@@ -371,10 +394,9 @@ int finalRound(){
 			output = "Wife says: \"You peaked in highschool.\" (FATALITY)";
 			movecursor(++inner_yStart,centerX(output));
 			cout << output << endl;
+			usleep(5'000'000);
 			return 0;
 		}
 	}
 
 }
-//you are acting just like your mother (Walks away)
-// You peaked in high school (Walks away)

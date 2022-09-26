@@ -1,6 +1,6 @@
-//Partners: Voss, Sayre, Heins, Henson
-//Bullet Points:
-//Extra Credit:
+//Partners: Voss (wrote the most), Sayre, Heins, Henson
+//Bullet Points: 5/5
+//Extra Credit: 3/3
 //URL to cover art and music: https://www.youtube.com/watch?v=tX7EOyNQvKY
 
 /* Includes */
@@ -275,34 +275,34 @@ void Intro() {
 	usleep(3'000'000);
 
 	dialog("Suddenly, you awaken to the sound of the front door slamming shut. You quickly realize you passed out drunk on the couch again...");
-	usleep(5'000'000);
+	usleep(8'000'000);
 
 	dialog("You think to yourself, -= I've really got to quit drinking so much at Timmy's T-ball games. Then again, who else is going to yell at the ref... =-");
-	usleep(6'000'000);
+	usleep(8'000'000);
 
 	dialog("You sit up, still wearing the same clothes as yesterday.");
-	usleep(5'000'000);
+	usleep(7'000'000);
 
 	dialog("White New Balance shoes with grass stains, long white socks, faded knee brace, cargo shorts containing random tools and at least four dollars in spare change.");
-	usleep(7'000'000);
+	usleep(9'000'000);
 
 	dialog("You are also wearing your favorite Dale Earnhardt T-shirt with the sleeves cut off, and of course your lucky Busch Light hat.");
-	usleep(7'000'000);
+	usleep(8'000'000);
 
 	dialog("You stumble into the kitchen and see a note from the wife that says...");
-	usleep(5'000'000);
+	usleep(7'000'000);
 
 	dialog("-= I have taken Timmy and the credit card to go shopping. Finish the honey-do-list before I return. =-");
+	usleep(9'000'000);
+
+	dialog("- Love, Karen");
 	usleep(5'000'000);
 
-	dialog("- Love Karen");
-	usleep(3'000'000);
-
 	dialog("Controls are WASD or ARROW_KEYS for movement and ENTER for interaction!");
-	usleep(3'500'000);
+	usleep(4'500'000);
 
 	dialog("Good luck Dad Bod, remember to think like a Dad Bod!");
-	usleep(3'500'000);
+	usleep(5'000'000);
 
 
 	return;
@@ -417,7 +417,10 @@ bool screenSizeBad() {
 	int mapSizeY = world_map.size(), mapSizeX = world_map.at(0).size();
 	int mapBorderSizeY = ROWS * MAP_BORDER_Y, mapBorderSizeX = COLS * MAP_BORDER_X;
 
-	if (mapSizeY > mapBorderSizeY or mapSizeX > mapBorderSizeX) return true;
+int	taskSizeX = tasks.at(3).size();
+int taskBorderSizeX = COLS * TASK_BORDER_X;
+
+	if (mapSizeY >= mapBorderSizeY or mapSizeX >= mapBorderSizeX or taskSizeX >= taskBorderSizeX - 4) return true;
 	else return false;
 }
 
@@ -456,6 +459,8 @@ void raw_mode_off(){
 	cout << RESET;
 }
 void raw_mode_on(int taskNum, int row, int col){
+	dialog("You may have acquired a new item! Check your inventory to find out!");
+	usleep(5'000'000);
 	if(completedTask.at(taskNum) == 2) world_map.at(row).at(col) = ' ';
 	set_raw_mode(true);
 	show_cursor(false);

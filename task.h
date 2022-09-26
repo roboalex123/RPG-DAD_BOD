@@ -12,7 +12,7 @@ int centerX(string output){
 int ikeaBook(){
 	clearscreen();
 	int yStart = rows / 2;
-	int chances = 3;
+	int chances = 2;
 
 	show_cursor(false);
 	string output = "Okay.... I guess I will build this stupid bookcase";
@@ -212,7 +212,7 @@ int ikeaBook(){
 int toiletClog(){//task 2
 	clearscreen();
 	int yStart = rows / 2;
-	int chances = 3;
+	int chances = 2;
 
 	show_cursor(false);
 	string output = "Time to unclog the toilet.";
@@ -361,7 +361,7 @@ int toiletClog(){//task 2
 		movecursor(inner_yStart,centerX(output));
 		cout << output << endl;
 
-		output = "2. It's unclogged, but there is water on the floor and you act like youdidn't see the water";
+		output = "2. It's unclogged, but there is water on the floor and you act like you didn't see the water";
 		movecursor(++inner_yStart,centerX(output));
 		cout << output << endl;
 
@@ -412,7 +412,7 @@ int toiletClog(){//task 2
 int mowLawn(){//task 3
 	clearscreen();
 	int yStart = rows / 2;
-	int chances = 3;
+	int chances = 2;
 
 	show_cursor(false);
 	string output = "Hell yeah, something I like, lets mow the lawn!";
@@ -613,7 +613,7 @@ int mowLawn(){//task 3
 int hornetNest(){//task 4
 	clearscreen();
 	int yStart = rows / 2;
-	int chances = 3;
+	int chances = 2;
 
 	show_cursor(false);
 	string output = "Hornets will fear me when I am done with them.";
@@ -813,7 +813,7 @@ int hornetNest(){//task 4
 int bbq(){//task 5
 	clearscreen();
 	int yStart = rows / 2;
-	int chances = 3;
+	int chances = 2;
 
 	show_cursor(false);
 	string output = "BBQ is life!";
@@ -1009,4 +1009,3 @@ int bbq(){//task 5
 	show_cursor(true);
 	return 2;
 }
-
