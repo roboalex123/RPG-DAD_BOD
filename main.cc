@@ -275,10 +275,10 @@ void Intro() {
 	dialog("Suddenly, you awaken to the sound of the front door slamming shut. You quickly realize you passed out drunk on the couch again...");
 	usleep(5'000'000);
 
-	dialog("You think to yourself, \"I\'ve really got to quit drinking so much at Timm\'s T-ball games. Then again, who else is going to yell at the ref...\"");
+	dialog("You think to yourself, -= I've really got to quit drinking so much at Timmy's T-ball games. Then again, who else is going to yell at the ref... =-");
 	usleep(6'000'000);
 
-	dialog("You sit up, still wearing yesterday\'s apparel.");
+	dialog("You sit up, still wearing the same clothes as yesterday.");
 	usleep(5'000'000);
 
 	dialog("White New Balance shoes with grass stains, long white socks, faded knee brace, cargo shorts containing random tools and at least four dollars in spare change.");
@@ -290,11 +290,18 @@ void Intro() {
 	dialog("You stumble into the kitchen and see a note from the wife that says...");
 	usleep(5'000'000);
 
-	dialog("\"I have taken Timmy and the credit card to go shopping. Finish the honey-do-list before I return.\"");
+	dialog("-= I have taken Timmy and the credit card to go shopping. Finish the honey-do-list before I return. =-");
 	usleep(5'000'000);
 
 	dialog("- Love Karen");
 	usleep(3'000'000);
+
+	dialog("Controls are WASD or ARROW_KEYS for movement and ENTER for interaction!");
+	usleep(3'500'000);
+
+	dialog("Good luck Dad Bod, remember to think like a Dad Bod!");
+	usleep(3'500'000);
+
 
 	return;
 }
