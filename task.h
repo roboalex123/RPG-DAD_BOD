@@ -57,6 +57,14 @@ int ikeaBook(){
 		int choice = read<int>(output);
 			show_cursor(false);
 
+			if (choice < 1 or choice > 3){
+            output ="Please enter a valid choice!";
+            movecursor(++inner_yStart,centerX(output));
+            cout << output << endl;
+            continue;
+			}
+
+
 		if (choice == 1){
 			output =  "Now that's thinking like a Dad Bod.";
 			movecursor(++inner_yStart,centerX(output));
@@ -109,6 +117,14 @@ int ikeaBook(){
 		int choice = read<int>(output);
 			show_cursor(false);
 
+			if (choice < 1 or choice > 3){
+            output ="Please enter a valid choice!";
+            movecursor(++inner_yStart,centerX(output));
+            cout << output << endl;
+            continue;
+            }
+
+
 		if (choice == 2){
 			output =  "Now that's thinking like a Dad Bod.";
 			movecursor(++inner_yStart,centerX(output));
@@ -158,6 +174,14 @@ int ikeaBook(){
 			show_cursor(true);
 		int choice = read<int>(output);
 			show_cursor(false);
+
+			if (choice < 1 or choice > 3){
+            output ="Please enter a valid choice!";
+            movecursor(++inner_yStart,centerX(output));
+            cout << output << endl;
+            continue;
+            }
+
 
 		if (choice == 3){
 			output =  "Now that's thinking like a Dad Bod.";
@@ -233,6 +257,14 @@ int toiletClog(){//task 2
 		int choice = read<int>(output);
 		show_cursor(false);
 
+		if (choice < 1 or choice > 3){
+            output ="Please enter a valid choice!";
+            movecursor(++inner_yStart,centerX(output));
+            cout << output << endl;
+            continue;
+            }
+
+
 		if (choice == 1){
 			output =  "Now that's thinking like a Dad Bod.";
 			movecursor(++inner_yStart,centerX(output));
@@ -285,6 +317,14 @@ int toiletClog(){//task 2
 		int choice = read<int>(output);
 		show_cursor(false);
 
+		if (choice < 1 or choice > 3){
+            output ="Please enter a valid choice!";
+            movecursor(++inner_yStart,centerX(output));
+            cout << output << endl;
+            continue;
+            }
+
+
 		if (choice == 3){
 			output =  "Now that's thinking like a Dad Bod.";
 			movecursor(++inner_yStart,centerX(output));
@@ -334,6 +374,14 @@ int toiletClog(){//task 2
 		show_cursor(true);
 		int choice = read<int>(output);
 		show_cursor(false);
+
+		if (choice < 1 or choice > 3){
+            output ="Please enter a valid choice!";
+            movecursor(++inner_yStart,centerX(output));
+            cout << output << endl;
+            continue;
+            }
+
 
 		if (choice == 3){
 			output =  "Now that's thinking like a Dad Bod.";
@@ -409,6 +457,14 @@ int mowLawn(){//task 3
 		int choice = read<int>(output);
 		show_cursor(false);
 
+		if (choice < 1 or choice > 3){
+            output ="Please enter a valid choice!";
+            movecursor(++inner_yStart,centerX(output));
+            cout << output << endl;
+            continue;
+            }
+
+
 		if (choice == 1){
 			output =  "Now that's thinking like a Dad Bod.";
 			movecursor(++inner_yStart,centerX(output));
@@ -461,6 +517,14 @@ int mowLawn(){//task 3
 		int choice = read<int>(output);
 		show_cursor(false);
 
+		if (choice < 1 or choice > 3){
+            output ="Please enter a valid choice!";
+            movecursor(++inner_yStart,centerX(output));
+            cout << output << endl;
+            continue;
+            }
+
+
 		if (choice == 2){
 			output =  "Now that's thinking like a Dad Bod.";
 			movecursor(++inner_yStart,centerX(output));
@@ -510,6 +574,14 @@ int mowLawn(){//task 3
 		show_cursor(true);
 		int choice = read<int>(output);
 		show_cursor(false);
+
+		if (choice < 1 or choice > 3){
+            output ="Please enter a valid choice!";
+            movecursor(++inner_yStart,centerX(output));
+            cout << output << endl;
+            continue;
+            }
+
 
 		if (choice == 1){
 			output =  "Now that's thinking like a Dad Bod.";
@@ -586,6 +658,14 @@ int hornetNest(){//task 4
 		int choice = read<int>(output);
 		show_cursor(false);
 
+		if (choice < 1 or choice > 3){
+            output ="Please enter a valid choice!";
+            movecursor(++inner_yStart,centerX(output));
+            cout << output << endl;
+            continue;
+            }
+
+
 		if (choice == 1){
 			output =  "Now that's thinking like a Dad Bod.";
 			movecursor(++inner_yStart,centerX(output));
@@ -638,6 +718,14 @@ int hornetNest(){//task 4
 		int choice = read<int>(output);
 		show_cursor(false);
 
+		if (choice < 1 or choice > 3){
+            output ="Please enter a valid choice!";
+            movecursor(++inner_yStart,centerX(output));
+            cout << output << endl;
+            continue;
+            }
+
+
 		if (choice == 2){
 			output =  "Now that's thinking like a Dad Bod.";
 			movecursor(++inner_yStart,centerX(output));
@@ -687,6 +775,14 @@ int hornetNest(){//task 4
 		show_cursor(true);
 		int choice = read<int>(output);
 		show_cursor(false);
+
+		if (choice < 1 or choice > 3){
+            output ="Please enter a valid choice!";
+            movecursor(++inner_yStart,centerX(output));
+            cout << output << endl;
+            continue;
+            }
+
 
 		if (choice == 1){
 			output =  "Now that's thinking like a Dad Bod.";
@@ -762,6 +858,14 @@ int bbq(){//task 5
 		int choice = read<int>(output);
 		show_cursor(false);
 
+		if (choice < 1 or choice > 3){
+            output ="Please enter a valid choice!";
+            movecursor(++inner_yStart,centerX(output));
+            cout << output << endl;
+            continue;
+            }
+
+
 		if (choice == 1){
 			output =  "Now that's thinking like a Dad Bod.";
 			movecursor(++inner_yStart,centerX(output));
@@ -814,6 +918,14 @@ int bbq(){//task 5
 		int choice = read<int>(output);
 		show_cursor(false);
 
+		if (choice < 1 or choice > 3){
+            output ="Please enter a valid choice!";
+            movecursor(++inner_yStart,centerX(output));
+            cout << output << endl;
+            continue;
+            }
+
+
 		if (choice == 3){
 			output =  "Now that's thinking like a Dad Bod.";
 			movecursor(++inner_yStart,centerX(output));
@@ -863,6 +975,14 @@ int bbq(){//task 5
 		show_cursor(true);
 		int choice = read<int>(output);
 		show_cursor(false);
+
+		if (choice < 1 or choice > 3){
+            output ="Please enter a valid choice!";
+            movecursor(++inner_yStart,centerX(output));
+            cout << output << endl;
+            continue;
+            }
+
 
 		if (choice == 3){
 			output =  "Now that's thinking like a Dad Bod.";
